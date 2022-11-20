@@ -11,4 +11,16 @@ export default defineConfig({
             refresh: true,
         }),
     ],
+    resolve: {
+        // Workaround to fix error:
+        // Can't find stylesheet to import. @import '~admin-lte/build/scss/adminlte';
+        // https://github.com/vitejs/vite/issues/5764
+        alias: [
+            {
+                // this is required for the SCSS modules
+                find: /^~(.*)$/,
+                replacement: '$1',
+            },
+        ],
+    },
 });
