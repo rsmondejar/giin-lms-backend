@@ -12,7 +12,7 @@
           integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog=="
           crossorigin="anonymous"/>
 
-    <link href="{{ mix('css/app.css') }}" rel="stylesheet">
+    @vite(['resources/sass/app.scss'])
 
 </head>
 <body class="hold-transition login-page">
@@ -64,16 +64,13 @@
             <p class="mt-3 mb-1">
                 <a href="{{ route("login") }}">{{ __('auth.sign_in') }}</a>
             </p>
-            <p class="mb-0">
-                <a href="{{ route("register") }}" class="text-center">{{ __('auth.registration.title') }}</a>
-            </p>
         </div>
         <!-- /.login-card-body -->
     </div>
 </div>
 <!-- /.login-box -->
 
-<script src="{{ mix('js/app.js') }}"></script>
+@vite(['resources/js/app.js'])
 
 </body>
 </html>

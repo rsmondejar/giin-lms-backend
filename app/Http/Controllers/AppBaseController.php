@@ -2,6 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use Exception;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Log;
 use InfyOm\Generator\Utils\ResponseUtil;
 
 /**
@@ -31,5 +38,36 @@ class AppBaseController extends Controller
             'success' => true,
             'message' => $message
         ], 200);
+    }
+
+    /**
+     * Show the application dashboard.
+     *
+     * @return Application|Factory|View|Response
+     */
+    public static function index(): View
+    {
+        $packageVersion = self::getPackageVersion();
+
+        return view('home')->with(
+            [
+                "packageVersion" => $packageVersion
+            ]
+        );
+    }
+
+    public static function getPackageVersion(): ?string
+    {
+        $packageVersion = null;
+        try {
+            $composer = json_decode(File::get(base_path() . '/composer.json'));
+
+            $packageVersion = $composer->version;
+        } catch (Exception $error) {
+            Log::warning('Error getting composer package version');
+            Log::warning($error->getMessage());
+        }
+
+        return $packageVersion;
     }
 }

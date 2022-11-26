@@ -47,7 +47,7 @@
                     </li>
                     <!-- Menu Footer-->
                     <li class="user-footer">
-                        <a href="#" class="btn btn-default btn-flat">Profile</a>
+{{--                        <a href="#" class="btn btn-default btn-flat">Profile</a>--}}
                         <a href="#" class="btn btn-default btn-flat float-right"
                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                             {{ __('auth.sign_out') }}
@@ -72,10 +72,18 @@
     <!-- Main Footer -->
     <footer class="main-footer">
         <div class="float-right d-none d-sm-block">
-            <strong>Version</strong> 3.0.5
+            <strong>Version</strong> {{\App\Helpers\BackendVersion::getPackageVersion() ?? ''}}
         </div>
-        <strong>Copyright &copy; 2014-2022 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights
-        reserved.
+        <strong>Copyright &copy; {{ date('Y') }}
+            <a
+                href="https://www.rsmondejar.com"
+                target="_blank"
+                rel="noopener"
+                title="Websiste Raúl Sánchez Mondéjar"
+            >
+                RSMONDEJAR
+            </a>
+        </strong>
     </footer>
 </div>
 
