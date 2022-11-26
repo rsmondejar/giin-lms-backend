@@ -78,9 +78,6 @@
             <p class="mb-1">
                 <a href="{{ route('password.request') }}">{{ __('auth.login.forgot_password') }}</a>
             </p>
-            <p class="mb-0">
-                <a href="{{ route('register') }}" class="text-center">{{ __('auth.login.register_membership') }}</a>
-            </p>
         </div>
         <!-- /.login-card-body -->
     </div>
