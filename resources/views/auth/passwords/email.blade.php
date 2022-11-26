@@ -64,9 +64,6 @@
             <p class="mt-3 mb-1">
                 <a href="{{ route("login") }}">{{ __('auth.sign_in') }}</a>
             </p>
-            <p class="mb-0">
-                <a href="{{ route("register") }}" class="text-center">{{ __('auth.registration.title') }}</a>
-            </p>
         </div>
         <!-- /.login-card-body -->
     </div>
