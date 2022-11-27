@@ -6,7 +6,7 @@
         <em class="fa fa-edit"></em>
     </a>
     <a class='btn btn-danger btn-xs' wire:click="deleteRecord({{ $recordId }})"
-       onclick="confirm('Are you sure you want to remove this Record?') || event.stopImmediatePropagation()">
+       onclick="confirm('¿Estas seguro que quieres eliminar este registro?') || event.stopImmediatePropagation()">
         <em class="fa fa-trash"></em>
     </a>
 </div>

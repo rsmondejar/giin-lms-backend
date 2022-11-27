@@ -5,12 +5,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Businesses</h1>
+                    <h1>Listado de <strong>Empresas</strong></h1>
                 </div>
                 <div class="col-sm-6">
                     <a class="btn btn-primary float-right"
                        href="{{ route('businesses.create') }}">
-                        Add New
+                        Agregar
                     </a>
                 </div>
             </div>
@@ -24,7 +24,9 @@
         <div class="clearfix"></div>
 
         <div class="card">
-            @include('businesses.table')
+            <div class="card-body">
+                @livewire('businesses-table', [])
+            </div>
         </div>
     </div>
 

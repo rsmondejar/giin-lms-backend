@@ -34,10 +34,7 @@ class BusinessController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $businesses = $this->businessRepository->paginate(10);
-
-        return view('businesses.index')
-            ->with('businesses', $businesses);
+        return view('businesses.index');
     }
 
     /**

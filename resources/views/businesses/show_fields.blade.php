@@ -6,43 +6,43 @@
 
 <!-- Business Name Field -->
 <div class="col-sm-12">
-    {!! Form::label('business_name', 'Business Name:') !!}
+    {!! Form::label('business_name', 'Nombre empresa:') !!}
     <p>{{ $business->business_name }}</p>
 </div>
 
 <!-- Address Field -->
 <div class="col-sm-12">
-    {!! Form::label('address', 'Address:') !!}
+    {!! Form::label('address', 'Dirección:') !!}
     <p>{{ $business->address }}</p>
 </div>
 
 <!-- City Field -->
 <div class="col-sm-12">
-    {!! Form::label('city', 'City:') !!}
+    {!! Form::label('city', 'Ciudad:') !!}
     <p>{{ $business->city }}</p>
 </div>
 
 <!-- Postal Code Field -->
 <div class="col-sm-12">
-    {!! Form::label('postal_code', 'Postal Code:') !!}
+    {!! Form::label('postal_code', 'Código Postal:') !!}
     <p>{{ $business->postal_code }}</p>
 </div>
 
 <!-- Country Field -->
 <div class="col-sm-12">
-    {!! Form::label('country', 'Country:') !!}
+    {!! Form::label('country', 'País:') !!}
     <p>{{ $business->country }}</p>
 </div>
 
 <!-- Phone Field -->
 <div class="col-sm-12">
-    {!! Form::label('phone', 'Phone:') !!}
+    {!! Form::label('phone', 'Teléfono físico:') !!}
     <p>{{ $business->phone }}</p>
 </div>
 
 <!-- Email Field -->
 <div class="col-sm-12">
-    {!! Form::label('email', 'Email:') !!}
+    {!! Form::label('email', 'E-mail:') !!}
     <p>{{ $business->email }}</p>
 </div>
 
@@ -60,13 +60,13 @@
 
 <!-- Created At Field -->
 <div class="col-sm-12">
-    {!! Form::label('created_at', 'Created At:') !!}
+    {!! Form::label('created_at', 'Creado el:') !!}
     <p>{{ $business->created_at }}</p>
 </div>
 
 <!-- Updated At Field -->
 <div class="col-sm-12">
-    {!! Form::label('updated_at', 'Updated At:') !!}
+    {!! Form::label('updated_at', 'Actualizado el:') !!}
     <p>{{ $business->updated_at }}</p>
 </div>
 

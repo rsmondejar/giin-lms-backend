@@ -28,13 +28,13 @@ class PermissionsTable extends DataTableComponent
     public function columns(): array
     {
         return [
-            Column::make("Name", "name")
+            Column::make("Nombre permiso", "name")
                 ->sortable()
                 ->searchable(),
             Column::make("Guard Name", "guard_name")
                 ->sortable()
                 ->searchable(),
-            Column::make("Actions", 'id')
+            Column::make("Acciones", 'id')
                 ->format(
                     fn($value, $row, Column $column) => view('common.livewire-tables.actions', [
                         'showUrl' => route('permissions.show', $row->id),

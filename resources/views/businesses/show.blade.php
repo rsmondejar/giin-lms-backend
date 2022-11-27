@@ -5,15 +5,13 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>
-                    @lang('models/businesses.singular') @lang('crud.detail')
-                    </h1>
+                    <h1>Detalle de la <strong>Empresa</strong></h1>
                 </div>
                 <div class="col-sm-6">
                     <a class="btn btn-default float-right"
                        href="{{ route('businesses.index') }}">
-                                                    @lang('crud.back')
-                                            </a>
+                        @lang('crud.back')
+                    </a>
                 </div>
             </div>
         </div>
@@ -24,6 +22,9 @@
             <div class="card-body">
                 <div class="row">
                     @include('businesses.show_fields')
+                </div>
+                <div class="row">
+                    <a href="{{ route('businesses.index') }}" class="btn btn-default"> Volver </a>
                 </div>
             </div>
         </div>
