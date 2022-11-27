@@ -41,21 +41,9 @@ class AppBaseController extends Controller
     }
 
     /**
-     * Show the application dashboard.
-     *
-     * @return Application|Factory|View|Response
+     * Get Package Version
+     * @return string|null
      */
-    public static function index(): View
-    {
-        $packageVersion = self::getPackageVersion();
-
-        return view('home')->with(
-            [
-                "packageVersion" => $packageVersion
-            ]
-        );
-    }
-
     public static function getPackageVersion(): ?string
     {
         $packageVersion = null;

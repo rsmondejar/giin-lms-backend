@@ -8,6 +8,8 @@ use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
+    public const DEFAULT_STRING_LENGTH = 191;
+
     /**
      * Register any application services.
      *
@@ -25,7 +27,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Schema::defaultStringLength(191);
+        Schema::defaultStringLength(self::DEFAULT_STRING_LENGTH);
 
         if (!app()->environment('production')) {
             Mail::alwaysTo(env('MAIL_TO_DEVELOPER', ''));

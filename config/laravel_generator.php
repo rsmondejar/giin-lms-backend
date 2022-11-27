@@ -21,7 +21,7 @@ return [
 
         'repository'        => app_path('Repositories/'),
 
-        'routes'            => base_path('routes/web.php'),
+        'routes'            => base_path('routes/cms.php'),
 
         'api_routes'        => base_path('routes/api.php'),
 
@@ -176,7 +176,7 @@ return [
     |
     */
 
-    'tables' => 'blade',
+    'tables' => 'livewire',
 
     /*
     |--------------------------------------------------------------------------

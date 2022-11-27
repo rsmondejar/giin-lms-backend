@@ -10,6 +10,34 @@
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 @include('layouts.menu')
+
+                @hasrole('super-admin')
+                <li class="nav-item">
+                    <a href="{{ route('roles.index') }}" class="nav-link {{ Request::is('roles*') ? 'active' : '' }}">
+                        <em class="nav-icon fas fa-user-cog"></em>
+                        <p>Roles</p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a
+                        href="{{ route('permissions.index') }}"
+                        class="nav-link {{ Request::is('permissions*') ? 'active' : '' }}"
+                    >
+                        <em class="nav-icon fas fa-user-cog"></em>
+                        <p>Permisos</p>
+                    </a>
+                </li>
+                @endhasrole
+
+                @hasrole('super-admin')
+                <li class="nav-item"><!-- //NOSONAR -->
+                    <a href="{{ route('io_generator_builder') }}" class="nav-link" target="_blanl" rel="noopener">
+                        <em class="nav-icon fas fa-cogs"></em>
+                        <p>Builder Generator</p>
+                    </a>
+                </li>
+                @endhasrole
             </ul>
         </nav>
     </div>
