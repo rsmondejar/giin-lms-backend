@@ -6,11 +6,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>InfyOm Technologies</title>
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.2/css/select2.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/2.3.2/css/AdminLTE.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/iCheck/1.0.2/skins/all.css">
+    <link rel="stylesheet" href="{!! asset('vendor/infyomBuilder/bootstrap.min.css') !!}" />
+    <link rel="stylesheet" href="{!! asset('vendor/infyomBuilder/font-awesome.min.css') !!}" />
+    <link rel="stylesheet" href="{!! asset('vendor/infyomBuilder/select2.min.css') !!}" />
+    <link rel="stylesheet" href="{!! asset('vendor/infyomBuilder/AdminLTE.min.css') !!}" />
+    <link rel="stylesheet" href="{!! asset('vendor/infyomBuilder/all.css') !!}" />
 </head>
 <style>
     .chk-align {
@@ -321,10 +321,10 @@
     </section>
 </div>
 </body>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.2/js/select2.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/iCheck/1.0.2/icheck.min.js"></script>
+<script src="{!! asset('vendor/infyomBuilder/jquery.min.js') !!}"></script>
+<script src="{!! asset('vendor/infyomBuilder/bootstrap.min.js') !!}"></script>
+<script src="{!! asset('vendor/infyomBuilder/select2.min.js') !!}"></script>
+<script src="{!! asset('vendor/infyomBuilder/icheck.min.js') !!}"></script>
 
 <script>
     $("select").select2({width: '100%'});
