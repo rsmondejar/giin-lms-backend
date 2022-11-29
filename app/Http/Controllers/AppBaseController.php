@@ -3,13 +3,10 @@
 namespace App\Http\Controllers;
 
 use Exception;
-use Illuminate\Contracts\Foundation\Application;
-use Illuminate\Contracts\View\Factory;
-use Illuminate\Contracts\View\View;
-use Illuminate\Http\Response;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Log;
 use InfyOm\Generator\Utils\ResponseUtil;
+use OpenApi\Annotations as OA;
 
 /**
  * @OA\Server(url="/api")
