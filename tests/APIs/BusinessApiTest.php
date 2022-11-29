@@ -10,7 +10,11 @@ use App\Models\Business;
 
 class BusinessApiTest extends TestCase
 {
-    use ApiTestTrait, WithoutMiddleware, DatabaseTransactions;
+    use ApiTestTrait;
+    use WithoutMiddleware;
+    use DatabaseTransactions;
+
+    private const API_URL_ENDPOINT = '/api/businesses/';
 
     /**
      * @test
@@ -21,7 +25,8 @@ class BusinessApiTest extends TestCase
 
         $this->response = $this->json(
             'POST',
-            '/api/businesses', $business
+            self::API_URL_ENDPOINT,
+            $business
         );
 
         $this->assertApiResponse($business);
@@ -36,7 +41,7 @@ class BusinessApiTest extends TestCase
 
         $this->response = $this->json(
             'GET',
-            '/api/businesses/'.$business->id
+            self::API_URL_ENDPOINT . $business->id
         );
 
         $this->assertApiResponse($business->toArray());
@@ -52,7 +57,7 @@ class BusinessApiTest extends TestCase
 
         $this->response = $this->json(
             'PUT',
-            '/api/businesses/'.$business->id,
+            self::API_URL_ENDPOINT . $business->id,
             $editedBusiness
         );
 
@@ -68,13 +73,13 @@ class BusinessApiTest extends TestCase
 
         $this->response = $this->json(
             'DELETE',
-             '/api/businesses/'.$business->id
-         );
+            self::API_URL_ENDPOINT . $business->id
+        );
 
         $this->assertApiSuccess();
         $this->response = $this->json(
             'GET',
-            '/api/businesses/'.$business->id
+            self::API_URL_ENDPOINT . $business->id
         );
 
         $this->response->assertStatus(404);
