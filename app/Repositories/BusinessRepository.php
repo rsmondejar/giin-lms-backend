@@ -3,11 +3,10 @@
 namespace App\Repositories;
 
 use App\Models\Business;
-use App\Repositories\BaseRepository;
 
 class BusinessRepository extends BaseRepository
 {
-    protected $fieldSearchable = [
+    protected array $fieldSearchable = [
         'business_name',
         'address',
         'city',

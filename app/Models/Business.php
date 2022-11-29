@@ -133,18 +133,6 @@ class Business extends Model
         'logo' => 'string'
     ];
 
-    public static array $rules = [
-        'business_name' => 'required|unique:businesses|max:60',
-        'address' => 'required',
-        'city' => 'required|max:60',
-        'postal_code' => 'required|max:10',
-        'country' => 'required|max:60',
-        'phone' => 'required|max:20',
-        'email' => 'required|email|max:100',
-        'website' => 'max:100|nullable',
-        'logo' => 'max:255|nullable'
-    ];
-
     /**
      * Set Phone Attribute.
      * @param string $value
