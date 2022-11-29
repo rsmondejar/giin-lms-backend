@@ -7,16 +7,21 @@
     "version": "0.1.0-alpha",
     "require": {
         "php": "^8.0.2",
+        "darkaonline/l5-swagger": "^8.4",
         "guzzlehttp/guzzle": "^7.2",
         "infyomlabs/adminlte-templates": "^5.0",
+        "infyomlabs/generator-builder": "^1.0",
         "infyomlabs/laravel-generator": "^5.0",
         "infyomlabs/laravel-ui-adminlte": "^5.1",
+        "infyomlabs/swagger-generator": "^3.1",
         "laravel/framework": "^9.19",
         "laravel/sanctum": "^3.0",
         "laravel/tinker": "^2.7",
+        "rappasoft/laravel-livewire-tables": "^2.8",
         "spatie/laravel-permission": "^5.6"
     },
     "require-dev": {
+        "barryvdh/laravel-ide-helper": "^2.12",
         "doctrine/dbal": "~2.3",
         "fakerphp/faker": "^1.9.1",
         "laravel/pint": "^1.0",

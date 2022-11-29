@@ -3,13 +3,10 @@
 namespace App\Http\Controllers;
 
 use Exception;
-use Illuminate\Contracts\Foundation\Application;
-use Illuminate\Contracts\View\Factory;
-use Illuminate\Contracts\View\View;
-use Illuminate\Http\Response;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Log;
 use InfyOm\Generator\Utils\ResponseUtil;
+use OpenApi\Annotations as OA;
 
 /**
  * @OA\Server(url="/api")
@@ -41,21 +38,9 @@ class AppBaseController extends Controller
     }
 
     /**
-     * Show the application dashboard.
-     *
-     * @return Application|Factory|View|Response
+     * Get Package Version
+     * @return string|null
      */
-    public static function index(): View
-    {
-        $packageVersion = self::getPackageVersion();
-
-        return view('home')->with(
-            [
-                "packageVersion" => $packageVersion
-            ]
-        );
-    }
-
     public static function getPackageVersion(): ?string
     {
         $packageVersion = null;

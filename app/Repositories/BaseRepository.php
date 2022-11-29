@@ -2,7 +2,8 @@
 
 namespace App\Repositories;
 
-use Illuminate\Container\Container as Application;
+use App\Traits\UploadFilesTrait;
+use Exception;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
@@ -10,13 +11,15 @@ use Illuminate\Database\Eloquent\Model;
 
 abstract class BaseRepository
 {
+    use UploadFilesTrait;
+
     /**
      * @var Model
      */
-    protected $model;
+    protected Model $model;
 
     /**
-     * @throws \Exception
+     * @throws Exception
      */
     public function __construct()
     {
@@ -37,15 +40,15 @@ abstract class BaseRepository
      * Make Model instance
      *
      * @return Model
-     * @throws \Exception
+     * @throws Exception
      *
      */
-    public function makeModel()
+    public function makeModel(): Model
     {
         $model = app($this->model());
 
         if (!$model instanceof Model) {
-            throw new \Exception( // NOSONAR
+            throw new Exception( // NOSONAR
                 "Class {$this->model()} must be an instance of Illuminate\\Database\\Eloquent\\Model"
             ); // NOSONAR
         }
@@ -55,6 +58,9 @@ abstract class BaseRepository
 
     /**
      * Paginate records for scaffold.
+     * @param int $perPage
+     * @param array $columns
+     * @return LengthAwarePaginator
      */
     public function paginate(int $perPage, array $columns = ['*']): LengthAwarePaginator
     {
@@ -65,6 +71,10 @@ abstract class BaseRepository
 
     /**
      * Build a query for retrieving all records.
+     * @param array $search
+     * @param int|null $skip
+     * @param int|null $limit
+     * @return Builder
      */
     public function allQuery(array $search = [], int $skip = null, int $limit = null): Builder
     {
@@ -91,6 +101,11 @@ abstract class BaseRepository
 
     /**
      * Retrieve all records with given filter criteria
+     * @param array $search
+     * @param int|null $skip
+     * @param int|null $limit
+     * @param array $columns
+     * @return Collection
      */
     public function all(array $search = [], int $skip = null, int $limit = null, array $columns = ['*']): Collection
     {
@@ -101,9 +116,13 @@ abstract class BaseRepository
 
     /**
      * Create model record
+     * @param array $input
+     * @return Model
      */
     public function create(array $input): Model
     {
+        $input = $this->saveFiles($input);
+
         $model = $this->model->newInstance($input);
 
         $model->save();
@@ -114,9 +133,11 @@ abstract class BaseRepository
     /**
      * Find model record for given id
      *
-     * @return Builder|Builder[]|Collection|Model|null
+     * @param int $id
+     * @param array $columns
+     * @return Model|Collection|Builder|array|null
      */
-    public function find(int $id, array $columns = ['*'])
+    public function find(int $id, array $columns = ['*']): Model|Collection|Builder|array|null
     {
         $query = $this->model->newQuery();
 
@@ -126,13 +147,17 @@ abstract class BaseRepository
     /**
      * Update model record for given id
      *
-     * @return Builder|Builder[]|Collection|Model
+     * @param array $input
+     * @param int $id
+     * @return Model|Collection|Builder|array
      */
-    public function update(array $input, int $id)
+    public function update(array $input, int $id): Model|Collection|Builder|array
     {
         $query = $this->model->newQuery();
 
         $model = $query->findOrFail($id);
+
+        $input = $this->saveFiles($input);
 
         $model->fill($input);
 
@@ -142,11 +167,10 @@ abstract class BaseRepository
     }
 
     /**
+     * @param int $id
      * @return bool|mixed|null
-     * @throws \Exception
-     *
      */
-    public function delete(int $id)
+    public function delete(int $id): mixed
     {
         $query = $this->model->newQuery();
 
