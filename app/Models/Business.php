@@ -2,14 +2,21 @@
 
 namespace App\Models;
 
+use Database\Factories\BusinessFactory;
+use Eloquent;
+use Exception;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Carbon;
+use JetBrains\PhpStorm\Pure;
 use OpenApi\Annotations as OA;
 
-
 /**
- * @OA\Schema(
+ * App\Models\Business
+ *
+ * @OA\Schema (
  *      schema="Business",
  *      required={"id","business_name","address","city","postal_code","country","phone","email"},
  *      @OA\Property(
@@ -100,6 +107,42 @@ use OpenApi\Annotations as OA;
  *          format="date-time"
  *      )
  * )
+ * @property int $id
+ * @property string $business_name
+ * @property string $address
+ * @property string $city
+ * @property string $postal_code
+ * @property string $country
+ * @property string $phone
+ * @property string $email
+ * @property string|null $website
+ * @property string|null $logo
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @property Carbon|null $deleted_at
+ * @property-read string $logo_folder_path
+ * @property-read string $logo_path
+ * @method static BusinessFactory factory(...$parameters)
+ * @method static Builder|Business newModelQuery()
+ * @method static Builder|Business newQuery()
+ * @method static \Illuminate\Database\Query\Builder|Business onlyTrashed()
+ * @method static Builder|Business query()
+ * @method static Builder|Business whereAddress($value)
+ * @method static Builder|Business whereBusinessName($value)
+ * @method static Builder|Business whereCity($value)
+ * @method static Builder|Business whereCountry($value)
+ * @method static Builder|Business whereCreatedAt($value)
+ * @method static Builder|Business whereDeletedAt($value)
+ * @method static Builder|Business whereEmail($value)
+ * @method static Builder|Business whereId($value)
+ * @method static Builder|Business whereLogo($value)
+ * @method static Builder|Business wherePhone($value)
+ * @method static Builder|Business wherePostalCode($value)
+ * @method static Builder|Business whereUpdatedAt($value)
+ * @method static Builder|Business whereWebsite($value)
+ * @method static \Illuminate\Database\Query\Builder|Business withTrashed()
+ * @method static \Illuminate\Database\Query\Builder|Business withoutTrashed()
+ * @mixin Eloquent
  */
 class Business extends Model
 {
@@ -133,6 +176,8 @@ class Business extends Model
         'logo' => 'string'
     ];
 
+    public $appends = ['logo_path', 'logo_folder_path'];
+
     /**
      * Set Phone Attribute.
      * @param string $value
@@ -144,4 +189,31 @@ class Business extends Model
         $this->attributes['phone'] = str_replace(' ', '', $value);
     }
 
+    /**
+     * Get Logo Path
+     * @return string Logo Path
+     */
+    #[Pure] public function getLogoPathAttribute(): string
+    {
+        try {
+            $image = $this->attributes['logo'];
+        } catch (Exception $e) {
+            $image = null;
+        }
+
+        if (null !== $image) {
+            return $this->getLogoFolderPathAttribute() . $image;
+        } else {
+            return "/img/no-image.png";
+        }
+    }
+
+    /**
+     * Get Logo Folder Path
+     * @return string Logo Folder Path
+     */
+    public function getLogoFolderPathAttribute(): string
+    {
+        return "/files/";
+    }
 }

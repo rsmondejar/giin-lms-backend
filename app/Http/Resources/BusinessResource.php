@@ -2,6 +2,8 @@
 
 namespace App\Http\Resources;
 
+use App\Models\Business;
+use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class BusinessResource extends JsonResource
@@ -9,11 +11,12 @@ class BusinessResource extends JsonResource
     /**
      * Transform the resource into an array.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param Request $request
      * @return array
      */
-    public function toArray($request)
+    public function toArray($request): array
     {
+        /** @var Business $this */
         return [
             'id' => $this->id,
             'business_name' => $this->business_name,

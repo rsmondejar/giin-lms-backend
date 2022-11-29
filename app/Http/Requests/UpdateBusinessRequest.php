@@ -2,7 +2,6 @@
 
 namespace App\Http\Requests;
 
-use App\Models\Business;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateBusinessRequest extends FormRequest
@@ -12,7 +11,7 @@ class UpdateBusinessRequest extends FormRequest
      *
      * @return bool
      */
-    public function authorize()
+    public function authorize(): bool
     {
         return true;
     }

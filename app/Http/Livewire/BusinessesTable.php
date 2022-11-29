@@ -2,10 +2,11 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Business;
 use Laracasts\Flash\Flash;
 use Rappasoft\LaravelLivewireTables\DataTableComponent;
 use Rappasoft\LaravelLivewireTables\Views\Column;
-use App\Models\Business;
+use Rappasoft\LaravelLivewireTables\Views\Columns\ImageColumn;
 
 class BusinessesTable extends DataTableComponent
 {
@@ -52,10 +53,17 @@ class BusinessesTable extends DataTableComponent
             Column::make("Website", "website")
                 ->sortable()
                 ->searchable(),
-            Column::make("Logo", "logo")
-                ->sortable()
-                ->searchable(),
-
+            Column::make("", "logo"), // Not posible to remove
+            ImageColumn::make("Logo", "logo")
+                ->location(
+                    fn (Business $row) => $row->logo_path
+                )
+                ->attributes(fn (Business $row) => [
+                    'class' => 'rounded-circle shadow-4-strong',
+                    'style' => 'width: 50px;',
+                    'alt' => $row->logo_path,
+                ]),
+            Column::make("", "logo"),
             Column::make("Acciones", 'id')
                 ->format(
                     fn($value, $row, Column $column) => view('common.livewire-tables.actions', [

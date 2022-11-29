@@ -111,7 +111,7 @@
     <div class="input-group">
         <div class="custom-file">
             {!! Form::file('logo', [
-                'class' => 'custom-file-input',
+                'class' => 'custom-file-input js-imagen-input-file',
                 'accept' => "image/png, image/jpeg",
                 'aria-describedby' => "logoHelpBlock",
             ]) !!}
@@ -125,19 +125,21 @@
         Opcional. Solo se aceptan imagenes en formato PNG ó JPG
     </small>
 
-    <div class='img-thumb-container'>
+    <div class='img-thumb-container' data-field=logo>
         <a
             href='{{ (isset($business->logo) && (strlen($business->logo) > 3))
                 ? '/files/' . $business->logo
                 : '/img/no-image.png' }}'
-            target='_blank' title='Zoom'
+            target='_blank'
+            title='Zoom'
+            data-field='logo'
         >
             <img
                 src="{{ (isset($business?->logo) && (strlen($business->logo) > 3))
                     ? '/files/' . $business?->logo
                     : '/img/no-image.png' }}"
                 class='img-thumb'
-                width="200"
+                width="100"
                 alt="Image"
             />
         </a>
