@@ -120,8 +120,27 @@
             ]) !!}
         </div>
     </div>
+
     <small id="logoHelpBlock" class="form-text text-muted">
         Opcional. Solo se aceptan imagenes en formato PNG ó JPG
     </small>
+
+    <div class='img-thumb-container'>
+        <a
+            href='{{ (isset($business->logo) && (strlen($business->logo) > 3))
+                ? '/files/' . $business->logo
+                : '/img/no-image.png' }}'
+            target='_blank' title='Zoom'
+        >
+            <img
+                src="{{ (isset($business?->logo) && (strlen($business->logo) > 3))
+                    ? '/files/' . $business?->logo
+                    : '/img/no-image.png' }}"
+                class='img-thumb'
+                width="200"
+                alt="Image"
+            />
+        </a>
+    </div>
 </div>
 <div class="clearfix"></div>

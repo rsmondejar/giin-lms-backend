@@ -39,7 +39,7 @@ class UpdateBusinessRequest extends FormRequest
             'phone' => 'required|max:20',
             'email' => 'required|email|max:100',
             'website' => 'max:100|nullable',
-            'logo' => 'max:255|nullable'
+            'logo' => 'max:255|nullable|mimes:jpg,png|max:1024'
         ];
     }
 }
