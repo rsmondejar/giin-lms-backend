@@ -20,21 +20,21 @@ class BusinessFactory extends Factory
      *
      * @return array
      */
-    public function definition()
+    public function definition(): array
     {
-        
         return [
             'business_name' => $this->faker->text($this->faker->numberBetween(5, 60)),
-            'address' => $this->faker->text($this->faker->numberBetween(5, 4096)),
-            'city' => $this->faker->text($this->faker->numberBetween(5, 60)),
-            'postal_code' => $this->faker->text($this->faker->numberBetween(5, 10)),
-            'country' => $this->faker->text($this->faker->numberBetween(5, 60)),
-            'phone' => $this->faker->numerify('0##########'),
+            'address' => $this->faker->streetAddress(),
+            'city' => $this->faker->city(),
+            'postal_code' => $this->faker->postcode(),
+            'country' => $this->faker->country(),
+            'phone' => $this->faker->phoneNumber(),
             'email' => $this->faker->email,
             'website' => $this->faker->text($this->faker->numberBetween(5, 100)),
-            'logo' => $this->faker->text($this->faker->numberBetween(5, 255)),
+            'logo' => $this->faker->slug($this->faker->numberBetween(2, 5)) . '.jpg',
             'created_at' => $this->faker->date('Y-m-d H:i:s'),
-            'updated_at' => $this->faker->date('Y-m-d H:i:s')
+            'updated_at' => $this->faker->date('Y-m-d H:i:s'),
+            'deleted_at' => null,
         ];
     }
 }

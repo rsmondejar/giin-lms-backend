@@ -4,13 +4,14 @@ namespace Tests\Repositories;
 
 use App\Models\Business;
 use App\Repositories\BusinessRepository;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 use Tests\ApiTestTrait;
 
 class BusinessRepositoryTest extends TestCase
 {
-    use ApiTestTrait, DatabaseTransactions;
+    use ApiTestTrait;
+    use RefreshDatabase;
 
     protected BusinessRepository $businessRepo;
 
