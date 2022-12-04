@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Log;
  */
 class BackendVersion
 {
+    private static string $composerFileName = "composer.json";
+
     /**
      * Get Package Version
      * @return string|null
@@ -19,7 +21,7 @@ class BackendVersion
     {
         $packageVersion = null;
         try {
-            $composer = json_decode(File::get(base_path() . '/composer.json'));
+            $composer = json_decode(File::get(base_path() . '/' .self::getComposerFileName()));
 
             $packageVersion = $composer->version;
         } catch (\Exception $error) {
@@ -28,5 +30,24 @@ class BackendVersion
         }
 
         return $packageVersion;
+    }
+
+    /**
+     * Set Composer File Name.
+     * @param string $fileName Composer File Name.
+     * @return void
+     */
+    public static function setComposerFileName(string $fileName = "composer.json"): void
+    {
+        self::$composerFileName = $fileName;
+    }
+
+    /**
+     * Get Composer File Name.
+     * @return string Composer File Name.
+     */
+    public static function getComposerFileName(): string
+    {
+        return self::$composerFileName;
     }
 }
