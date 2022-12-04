@@ -144,6 +144,8 @@ use OpenApi\Annotations as OA;
  * @method static \Illuminate\Database\Query\Builder|Business withTrashed()
  * @method static \Illuminate\Database\Query\Builder|Business withoutTrashed()
  * @mixin Eloquent
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\User[] $users
+ * @property-read int|null $users_count
  */
 class Business extends Model
 {

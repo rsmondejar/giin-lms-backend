@@ -2,39 +2,52 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
+
+use App\Models\Business;
+use App\Models\Department;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
-/**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\User>
- */
 class UserFactory extends Factory
 {
     /**
-     * Define the model's default state.
+     * The name of the factory's corresponding model.
      *
-     * @return array<string, mixed>
+     * @var string
      */
-    public function definition()
-    {
-        return [
-            'name' => fake()->name(),
-            'email' => fake()->unique()->safeEmail(),
-            'email_verified_at' => now(),
-            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
-            'remember_token' => Str::random(10),
-        ];
-    }
+    protected $model = User::class;
 
     /**
-     * Indicate that the model's email address should be unverified.
+     * Define the model's default state.
      *
-     * @return static
+     * @return array
      */
-    public function unverified()
+    public function definition(): array
     {
-        return $this->state(fn (array $attributes) => [
+        $business = Business::inRandomOrder()->first();
+        if (!$business) {
+            $business = Business::factory()->create();
+        }
+
+        $department = Department::inRandomOrder()->first();
+        if (!$department) {
+            $department = Department::factory()->create();
+        }
+
+        $displayName = $this->faker->firstName . ' ' . $this->faker->lastName;
+
+        return [
+            'name' => $displayName,
+            'email' => Str::slug($displayName, '.').'@example.com',
             'email_verified_at' => null,
-        ]);
+            'password' => Hash::make('password'),
+            'remember_token' => null,
+            'business_id' => $business->id,
+            'department_id' => $department->id,
+            'created_at' => $this->faker->date('Y-m-d H:i:s'), // NOSONAR
+            'updated_at' => $this->faker->date('Y-m-d H:i:s') // NOSONAR
+        ];
     }
 }
