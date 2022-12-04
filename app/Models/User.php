@@ -96,4 +96,12 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Business::class);
     }
+
+    /**
+     * @return BelongsTo
+     */
+    public function department(): BelongsTo
+    {
+        return $this->belongsTo(Department::class);
+    }
 }

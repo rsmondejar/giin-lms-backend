@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\DepartmentController;
+use App\Http\Controllers\PermissionController;
+use App\Http\Controllers\RoleController;
 use Illuminate\Support\Facades\Route;
 use InfyOm\GeneratorBuilder\Controllers\GeneratorBuilderController;
 
@@ -38,5 +41,6 @@ Route::get('relation_field_template', [GeneratorBuilderController::class, 'relat
 
 Route::resource('businesses', App\Http\Controllers\BusinessController::class);
 
-Route::resource('roles', App\Http\Controllers\RoleController::class);
-Route::resource('permissions', App\Http\Controllers\PermissionController::class);
+Route::resource('roles', RoleController::class);
+Route::resource('permissions', PermissionController::class);
+Route::resource('departments', DepartmentController::class);

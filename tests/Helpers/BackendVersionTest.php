@@ -7,11 +7,6 @@ use Tests\TestCase;
 
 class BackendVersionTest extends TestCase
 {
-    public function setUp(): void
-    {
-        parent::setUp();
-    }
-
     /**
      * @test Get Package Version OK
      */

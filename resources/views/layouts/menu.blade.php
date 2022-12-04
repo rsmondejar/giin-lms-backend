@@ -11,3 +11,10 @@
         <p>Empresas</p>
     </a>
 </li>
+
+<li class="nav-item"><!-- //NOSONAR -->
+    <a href="{{ route('departments.index') }}" class="nav-link {{ Request::is('departments*') ? 'active' : '' }}">
+        <em class="nav-icon fas fa-columns"></em>
+        <p>Departamentos</p>
+    </a>
+</li>
