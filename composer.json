@@ -4,7 +4,7 @@
     "description": "GIIN - Leave Management System (LMS).",
     "keywords": ["lms", "Leave Management System", "laravel"],
     "license": "MIT",
-    "version": "0.1.0-alpha",
+    "version": "0.2.0-alpha",
     "require": {
         "php": "^8.0.2",
         "darkaonline/l5-swagger": "^8.4",
