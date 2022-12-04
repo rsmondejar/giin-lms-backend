@@ -51,6 +51,12 @@ use Spatie\Permission\Traits\HasRoles;
  * @method static Builder|User whereRememberToken($value)
  * @method static Builder|User whereUpdatedAt($value)
  * @mixin Eloquent
+ * @property int|null $business_id
+ * @property int|null $department_id
+ * @property-read \App\Models\Business|null $business
+ * @property-read \App\Models\Department|null $department
+ * @method static Builder|User whereBusinessId($value)
+ * @method static Builder|User whereDepartmentId($value)
  */
 class User extends Authenticatable
 {
@@ -68,6 +74,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'business_id',
+        'department_id',
     ];
 
     /**

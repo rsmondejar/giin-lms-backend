@@ -6,6 +6,13 @@
 </li>
 
 <li class="nav-item"><!-- //NOSONAR -->
+    <a href="{{ route('users.index') }}" class="nav-link {{ Request::is('users*') ? 'active' : '' }}">
+        <em class="nav-icon fas fa-users"></em>
+        <p>Usuarios</p>
+    </a>
+</li>
+
+<li class="nav-item"><!-- //NOSONAR -->
     <a href="{{ route('businesses.index') }}" class="nav-link {{ Request::is('businesses*') ? 'active' : '' }}">
         <em class="nav-icon fas fa-building"></em>
         <p>Empresas</p>

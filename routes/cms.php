@@ -3,6 +3,7 @@
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use InfyOm\GeneratorBuilder\Controllers\GeneratorBuilderController;
 
@@ -44,3 +45,4 @@ Route::resource('businesses', App\Http\Controllers\BusinessController::class);
 Route::resource('roles', RoleController::class);
 Route::resource('permissions', PermissionController::class);
 Route::resource('departments', DepartmentController::class);
+Route::resource('users', UserController::class);
