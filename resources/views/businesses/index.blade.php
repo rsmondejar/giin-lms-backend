@@ -24,9 +24,7 @@
         <div class="clearfix"></div>
 
         <div class="card">
-            <div class="card-body">
-                @livewire('businesses-table', [])
-            </div>
+            @include('businesses.table')
         </div>
     </div>
 

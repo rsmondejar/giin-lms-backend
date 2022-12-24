@@ -19,12 +19,12 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
  */
 
 import popper from 'popper.js'
-import jquery from 'jquery'
+import jQuery from 'jquery'
 import 'bootstrap';
 
 try {
     window.Popper = popper.default;
-    window.$ = window.jQuery = jquery;
+    window.$ = window.jQuery = jQuery;
 } catch (error) {
     console.error(error);
 }

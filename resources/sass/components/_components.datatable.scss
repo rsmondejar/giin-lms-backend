@@ -1,0 +1,49 @@
+$c-datatable-img-preview-width: 50px;
+
+.c-datatable-img-preview {
+    width: $c-datatable-img-preview-width;
+
+    &--full {
+        width: 100%;
+    }
+
+    &--2x {
+        width: $c-datatable-img-preview-width * 2;
+    }
+
+    &--3x {
+        width: $c-datatable-img-preview-width * 3;
+    }
+
+    &--4x {
+        width: $c-datatable-img-preview-width * 4;
+    }
+
+
+    &__link {
+        max-height: 300px;
+        overflow-y: auto;
+        display: block;
+    }
+}
+
+.c-datatable-img-link {
+    @include transition();
+    display: inline-block;
+    border: 4px dotted transparent;
+
+    &:hover {
+        opacity: .8;
+        border: 4px dotted #3c8dbc;
+    }
+}
+
+.c-datatable-color-preview {
+    border: 1px solid #000000;
+    padding: 5px 15px;
+    min-width: 100px;
+    width: 85px;
+    display: block;
+    text-align: center;
+    text-transform: uppercase;
+}

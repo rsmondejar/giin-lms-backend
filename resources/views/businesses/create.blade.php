@@ -5,7 +5,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-12">
-                    <h1>Dar de alta una empresa</h1>
+                    <h1>Dar de alta una <strong>empresa</strong></h1>
                 </div>
             </div>
         </div>
