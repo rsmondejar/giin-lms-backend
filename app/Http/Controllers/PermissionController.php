@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\DataTables\PermissionDataTable;
 use Exception;
 use App\Http\Requests\CreatePermissionRequest;
 use App\Http\Requests\UpdatePermissionRequest;
@@ -10,7 +11,6 @@ use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
 use Laracasts\Flash\Flash;
 
@@ -20,7 +20,9 @@ class PermissionController extends AppBaseController
     /** @var PermissionRepository $permissionRepository */
     private PermissionRepository $permissionRepository;
 
-    private const MODEL_NOT_FOUND = 'Permission not found';
+    private const MODEL_NOT_FOUND = 'No se ha encontrado el permiso';
+
+    private const MODEL_NAME = 'Permiso';
 
     public function __construct(PermissionRepository $permissionRepo)
     {
@@ -29,19 +31,19 @@ class PermissionController extends AppBaseController
 
     /**
      * Display a listing of the Permission.
-     * @param Request $request
-     * @return Application|Factory|View
+     * @param PermissionDataTable $permissionDataTable
+     * @return mixed
      */
-    public function index(Request $request)
+    public function index(PermissionDataTable $permissionDataTable): mixed
     {
-        return view('permissions.index');
+        return $permissionDataTable->render('permissions.index');
     }
 
     /**
      * Show the form for creating a new Permission.
      * @return Application|Factory|View
      */
-    public function create()
+    public function create(): View|Factory|Application
     {
         return view('permissions.create');
     }
@@ -51,13 +53,13 @@ class PermissionController extends AppBaseController
      * @param CreatePermissionRequest $request
      * @return Application|RedirectResponse|Redirector
      */
-    public function store(CreatePermissionRequest $request)
+    public function store(CreatePermissionRequest $request): Redirector|RedirectResponse|Application
     {
         $input = $request->all();
 
         $this->permissionRepository->create($input);
 
-        Flash::success('Permission saved successfully.');
+        Flash::success(sprintf("%s guardado correctamente.", self::MODEL_NAME));
 
         return redirect(route('permissions.index'));
     }
@@ -67,7 +69,7 @@ class PermissionController extends AppBaseController
      * @param int $id
      * @return Application|Factory|View|RedirectResponse|Redirector
      */
-    public function show(int $id)
+    public function show(int $id): View|Factory|Redirector|RedirectResponse|Application
     {
         $permission = $this->permissionRepository->find($id);
 
@@ -85,7 +87,7 @@ class PermissionController extends AppBaseController
      * @param int $id
      * @return Application|Factory|View|RedirectResponse|Redirector
      */
-    public function edit(int $id)
+    public function edit(int $id): View|Factory|Redirector|RedirectResponse|Application
     {
         $permission = $this->permissionRepository->find($id);
 
@@ -104,7 +106,7 @@ class PermissionController extends AppBaseController
      * @param UpdatePermissionRequest $request
      * @return Application|RedirectResponse|Redirector
      */
-    public function update(int $id, UpdatePermissionRequest $request)
+    public function update(int $id, UpdatePermissionRequest $request): Redirector|RedirectResponse|Application
     {
         $permission = $this->permissionRepository->find($id);
 
@@ -116,7 +118,7 @@ class PermissionController extends AppBaseController
 
         $this->permissionRepository->update($request->all(), $id);
 
-        Flash::success('Permission updated successfully.');
+        Flash::success(sprintf("%s actualizado correctamente.", self::MODEL_NAME));
 
         return redirect(route('permissions.index'));
     }
@@ -128,7 +130,7 @@ class PermissionController extends AppBaseController
      * @return Application|RedirectResponse|Redirector
      * @throws Exception
      */
-    public function destroy(int $id)
+    public function destroy(int $id): Redirector|RedirectResponse|Application
     {
         $permission = $this->permissionRepository->find($id);
 
@@ -140,7 +142,7 @@ class PermissionController extends AppBaseController
 
         $this->permissionRepository->delete($id);
 
-        Flash::success('Permission deleted successfully.');
+        Flash::success(sprintf("%s eliminadao correctamente.", self::MODEL_NAME));
 
         return redirect(route('permissions.index'));
     }

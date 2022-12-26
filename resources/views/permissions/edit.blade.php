@@ -5,9 +5,9 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-12">
-                    <h1>
-                        Edit Permission
-                    </h1>
+                    <div class="col-sm-12">
+                        <h1>Editar permiso: <strong>{!! $permission->name !!}</strong></h1>
+                    </div>
                 </div>
             </div>
         </div>
