@@ -5,7 +5,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-12">
-                    <h1>Crear Departamento</h1>
+                    <h1>Crear <strong>Departamento</strong></h1>
                 </div>
             </div>
         </div>

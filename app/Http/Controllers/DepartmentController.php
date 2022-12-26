@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\DataTables\DepartmentDataTable;
 use Exception;
 use App\Http\Requests\CreateDepartmentRequest;
 use App\Http\Requests\UpdateDepartmentRequest;
@@ -10,7 +11,6 @@ use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
 use Laracasts\Flash\Flash;
 
@@ -20,7 +20,9 @@ class DepartmentController extends AppBaseController
     /** @var DepartmentRepository $departmentRepository */
     private DepartmentRepository $departmentRepository;
 
-    private const MODEL_NOT_FOUND = 'Department not found';
+    private const MODEL_NOT_FOUND = 'No se ha encontrado el departamento';
+
+    private const MODEL_NAME = 'Departamento';
 
     public function __construct(DepartmentRepository $departmentRepo)
     {
@@ -29,30 +31,35 @@ class DepartmentController extends AppBaseController
 
     /**
      * Display a listing of the Department.
+     * @param DepartmentDataTable $departmentDataTable
+     * @return mixed
      */
-    public function index(Request $request)
+    public function index(DepartmentDataTable $departmentDataTable): mixed
     {
-        return view('departments.index');
+        return $departmentDataTable->render('departments.index');
     }
 
     /**
      * Show the form for creating a new Department.
+     * @return Factory|View|Application
      */
-    public function create()
+    public function create(): Factory|View|Application
     {
         return view('departments.create');
     }
 
     /**
      * Store a newly created Department in storage.
+     * @param CreateDepartmentRequest $request
+     * @return Redirector|Application|RedirectResponse
      */
-    public function store(CreateDepartmentRequest $request)
+    public function store(CreateDepartmentRequest $request): Redirector|Application|RedirectResponse
     {
         $input = $request->all();
 
         $this->departmentRepository->create($input);
 
-        Flash::success('Department saved successfully.');
+        Flash::success(sprintf("%s guardado correctamente.", self::MODEL_NAME));
 
         return redirect(route('departments.index'));
     }
@@ -62,7 +69,7 @@ class DepartmentController extends AppBaseController
      * @param int $id
      * @return Application|Factory|View|RedirectResponse|Redirector
      */
-    public function show(int $id)
+    public function show(int $id): View|Factory|Redirector|RedirectResponse|Application
     {
         $department = $this->departmentRepository->find($id);
 
@@ -80,7 +87,7 @@ class DepartmentController extends AppBaseController
      * @param int $id
      * @return Application|Factory|View|RedirectResponse|Redirector
      */
-    public function edit(int $id)
+    public function edit(int $id): View|Factory|Redirector|RedirectResponse|Application
     {
         $department = $this->departmentRepository->find($id);
 
@@ -99,7 +106,7 @@ class DepartmentController extends AppBaseController
      * @param UpdateDepartmentRequest $request
      * @return Application|RedirectResponse|Redirector
      */
-    public function update(int $id, UpdateDepartmentRequest $request)
+    public function update(int $id, UpdateDepartmentRequest $request): Redirector|RedirectResponse|Application
     {
         $department = $this->departmentRepository->find($id);
 
@@ -111,7 +118,7 @@ class DepartmentController extends AppBaseController
 
         $this->departmentRepository->update($request->all(), $id);
 
-        Flash::success('Department updated successfully.');
+        Flash::success(sprintf("%s actualizado correctamente.", self::MODEL_NAME));
 
         return redirect(route('departments.index'));
     }
@@ -123,7 +130,7 @@ class DepartmentController extends AppBaseController
      * @return Application|RedirectResponse|Redirector
      * @throws Exception
      */
-    public function destroy(int $id)
+    public function destroy(int $id): Redirector|RedirectResponse|Application
     {
         $department = $this->departmentRepository->find($id);
 
@@ -135,7 +142,7 @@ class DepartmentController extends AppBaseController
 
         $this->departmentRepository->delete($id);
 
-        Flash::success('Department deleted successfully.');
+        Flash::success(sprintf("%s eliminadao correctamente.", self::MODEL_NAME));
 
         return redirect(route('departments.index'));
     }

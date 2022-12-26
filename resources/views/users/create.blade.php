@@ -5,7 +5,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-12">
-                    <h1>Crear Usuarios</h1>
+                    <h1>Dar de alta un <strong>usuario</strong></h1>
                 </div>
             </div>
         </div>
@@ -17,7 +17,7 @@
 
         <div class="card">
 
-            {!! Form::open(['route' => 'users.store']) !!}
+            {!! Form::open(['route' => 'users.store', 'files' => true]) !!}
 
             <div class="card-body">
 

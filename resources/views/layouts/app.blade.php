@@ -95,6 +95,5 @@
 
 @stack('page_scripts')
 
-@livewireScripts
 </body>
 </html>

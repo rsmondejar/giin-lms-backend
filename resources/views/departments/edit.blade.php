@@ -5,7 +5,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-12">
-                    <h1>Editar Departamento</h1>
+                    <h1>Editar departamento: <strong>{!! $department->department_name !!}</strong></h1>
                 </div>
             </div>
         </div>

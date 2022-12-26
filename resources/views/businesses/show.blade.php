@@ -5,7 +5,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Detalle de la <strong>Empresa</strong></h1>
+                    <h1>Información de la empresa: <strong>{!! $business->business_name !!}</strong></h1>
                 </div>
                 <div class="col-sm-6">
                     <a class="btn btn-default float-right"
