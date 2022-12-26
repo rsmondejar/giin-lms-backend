@@ -29,8 +29,10 @@ class BusinessController extends AppBaseController
 
     /**
      * Display a listing of the Business.
+     * @param BusinessDataTable $businessDataTable
+     * @return mixed
      */
-    public function index(BusinessDataTable $businessDataTable)
+    public function index(BusinessDataTable $businessDataTable): mixed
     {
         return $businessDataTable->render('businesses.index');
     }

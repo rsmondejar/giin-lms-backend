@@ -5,7 +5,7 @@
         'class' => 'form-control',
         'required' => true,
         'maxlength' => '60',
-        'placeHolder' => 'Nombre de la empresa',
+        'placeHolder' => 'Nombre del departamento',
         'aria-describedby' => "department_nameHelpBlock",
     ]) !!}
     <small id="department_nameHelpBlock" class="form-text text-muted">Longitud máxima: 60 caracteres</small>
