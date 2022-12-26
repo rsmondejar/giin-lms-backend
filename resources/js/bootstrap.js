@@ -21,6 +21,8 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 import popper from 'popper.js'
 import jQuery from 'jquery'
 import 'bootstrap';
+// import "jquery-ui/dist/jquery-ui";
+import 'jquery-ui/ui/widgets/datepicker';
 
 try {
     window.Popper = popper.default;

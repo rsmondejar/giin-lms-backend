@@ -5,7 +5,9 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-12">
-                    <h1>Editar role: <strong>{!! $role->name !!}</strong></h1>
+                    <h1>
+                    Create Public Holidays
+                    </h1>
                 </div>
             </div>
         </div>
@@ -17,17 +19,19 @@
 
         <div class="card">
 
-            {!! Form::model($role, ['route' => ['roles.update', $role->id], 'method' => 'patch']) !!}
+            {!! Form::open(['route' => 'public-holidays.store']) !!}
 
             <div class="card-body">
+
                 <div class="row">
-                    @include('roles.fields')
+                    @include('public_holidays.fields')
                 </div>
+
             </div>
 
             <div class="card-footer">
-                {!! Form::submit('Guardar', ['class' => 'btn btn-primary']) !!}
-                <a href="{{ route('roles.index') }}" class="btn btn-default"> Volver </a>
+                {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
+                <a href="{{ route('public-holidays.index') }}" class="btn btn-default"> Cancel </a>
             </div>
 
             {!! Form::close() !!}

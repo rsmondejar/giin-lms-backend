@@ -3,6 +3,9 @@
 
 // Bootstrap
 @import '~admin-lte/build/scss/adminlte';
+@import '~jquery-ui/themes/base/base';
+@import '~jquery-ui/themes/base/theme';
+@import '~jquery-ui/themes/base/datepicker';
 
 // Components
 @import "components/components.datatable";

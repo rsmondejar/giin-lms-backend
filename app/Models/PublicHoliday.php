@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
@@ -10,6 +11,9 @@ use Illuminate\Database\Eloquent\Model;
  * App\Models\PublicHoliday
  *
  * @property-read string $day_name
+ * @property string $name Name
+ * @property Carbon $date Date
+ * @property int $year Year
  * @method static Builder|PublicHoliday newModelQuery()
  * @method static Builder|PublicHoliday newQuery()
  * @method static Builder|PublicHoliday ofYear(string $year)
@@ -25,6 +29,11 @@ class PublicHoliday extends Model
     protected $dates = ['date'];
 
     protected $appends = ['day_name'];
+
+    protected $casts = [
+        'name' => 'string',
+        'date' => 'date:Y-m-d',
+    ];
 
     /**
      * @return string
