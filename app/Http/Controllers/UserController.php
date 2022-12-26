@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\DataTables\UserDataTable;
 use App\Models\Business;
 use App\Models\Department;
 use Exception;
@@ -22,7 +23,9 @@ class UserController extends AppBaseController
     /** @var UserRepository $userRepository */
     private UserRepository $userRepository;
 
-    private const MODEL_NOT_FOUND = 'User not found';
+    private const MODEL_NOT_FOUND = 'No se ha encontrado el usuario';
+
+    private const MODEL_NAME = 'Usuario';
 
     public function __construct(UserRepository $userRepo)
     {
@@ -31,16 +34,19 @@ class UserController extends AppBaseController
 
     /**
      * Display a listing of the User.
+     * @param UserDataTable $userDataTable
+     * @return mixed
      */
-    public function index(Request $request)
+    public function index(UserDataTable $userDataTable): mixed
     {
-        return view('users.index');
+        return $userDataTable->render('users.index');
     }
 
     /**
      * Show the form for creating a new User.
+     * @return Factory|View|Application
      */
-    public function create()
+    public function create(): Factory|View|Application
     {
         self::viewsShare();
 
@@ -49,14 +55,16 @@ class UserController extends AppBaseController
 
     /**
      * Store a newly created User in storage.
+     * @param CreateUserRequest $request
+     * @return Redirector|Application|RedirectResponse
      */
-    public function store(CreateUserRequest $request)
+    public function store(CreateUserRequest $request): Redirector|Application|RedirectResponse
     {
         $dataRequest = self::parseRequest($request->all());
 
         $this->userRepository->create($dataRequest);
 
-        Flash::success('User saved successfully.');
+        Flash::success(sprintf("%s guardado correctamente.", self::MODEL_NAME));
 
         return redirect(route('users.index'));
     }
@@ -66,7 +74,7 @@ class UserController extends AppBaseController
      * @param int $id
      * @return Application|Factory|View|RedirectResponse|Redirector
      */
-    public function show(int $id)
+    public function show(int $id): View|Factory|Redirector|RedirectResponse|Application
     {
         $user = $this->userRepository->find($id);
 
@@ -84,7 +92,7 @@ class UserController extends AppBaseController
      * @param int $id
      * @return Application|Factory|View|RedirectResponse|Redirector
      */
-    public function edit(int $id)
+    public function edit(int $id): View|Factory|Redirector|RedirectResponse|Application
     {
         $user = $this->userRepository->find($id);
 
@@ -105,7 +113,7 @@ class UserController extends AppBaseController
      * @param UpdateUserRequest $request
      * @return Application|RedirectResponse|Redirector
      */
-    public function update(int $id, UpdateUserRequest $request)
+    public function update(int $id, UpdateUserRequest $request): Redirector|RedirectResponse|Application
     {
         $user = $this->userRepository->find($id);
 
@@ -119,7 +127,7 @@ class UserController extends AppBaseController
 
         $this->userRepository->update($dataRequest, $id);
 
-        Flash::success('User updated successfully.');
+        Flash::success(sprintf("%s actualizado correctamente.", self::MODEL_NAME));
 
         return redirect(route('users.index'));
     }
@@ -131,7 +139,7 @@ class UserController extends AppBaseController
      * @return Application|RedirectResponse|Redirector
      * @throws Exception
      */
-    public function destroy(int $id)
+    public function destroy(int $id): Redirector|RedirectResponse|Application
     {
         $user = $this->userRepository->find($id);
 
@@ -143,7 +151,7 @@ class UserController extends AppBaseController
 
         $this->userRepository->delete($id);
 
-        Flash::success('User deleted successfully.');
+        Flash::success(sprintf("%s eliminadao correctamente.", self::MODEL_NAME));
 
         return redirect(route('users.index'));
     }
