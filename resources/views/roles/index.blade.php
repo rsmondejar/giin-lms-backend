@@ -25,7 +25,7 @@
 
         <div class="card">
             <div class="card-body">
-                @livewire('roles-table', [])
+                @include('common.table')
             </div>
         </div>
     </div>
