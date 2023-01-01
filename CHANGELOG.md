@@ -9,6 +9,12 @@ Semver [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 - 
 
+## [0.3.0-alpha] - 01/01/2023
+
+- Feedback profesor Sprint 02. @rsmondejar
+- Gestión de vacaciones por parte del empleado. @rsmondejar
+- Gestión de vacaciones por parte del responsable. @rsmondejar
+
 ## [0.2.0-alpha] - 04/12/2022
 
 - CRUD de empresas. @rsmondejar
