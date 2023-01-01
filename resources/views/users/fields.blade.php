@@ -48,3 +48,20 @@
     {!! Form::label('department_id', 'Departamento:') !!}
     {!! Form::select('department_id', $departments, null, ['class' => 'form-control js-select2']) !!}
 </div>
+
+<div class="form-group col-sm-12">
+    {!! Form::label('roles[]', 'Roles:') !!}
+    {!! Form::select('roles[]', $roles, $userRoles, [
+        'class' => 'form-control js-duallist',
+        'multiple' => 'multiple'
+    ]) !!}
+</div>
+
+@push('page_scripts')
+    <script type="module">
+        $('.js-duallist').bootstrapDualListbox({
+            nonSelectedListLabel: 'Sin seleccionar',
+            selectedListLabel: 'Seleccionados',
+        });
+    </script>
+@endpush

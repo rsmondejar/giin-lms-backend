@@ -23,10 +23,16 @@ import jQuery from 'jquery'
 import 'bootstrap';
 // import "jquery-ui/dist/jquery-ui";
 import 'jquery-ui/ui/widgets/datepicker';
+import 'bootstrap-duallistbox/src/jquery.bootstrap-duallistbox';
+import flatpickr from 'flatpickr';
+import { Spanish } from 'flatpickr/dist/l10n/es.js'
+
 
 try {
     window.Popper = popper.default;
     window.$ = window.jQuery = jQuery;
+    window.flatpickr = flatpickr;
+    window.flatpickr.localize(Spanish);
 } catch (error) {
     console.error(error);
 }

@@ -19,6 +19,17 @@ use Illuminate\Database\Eloquent\Model;
  * @method static Builder|PublicHoliday ofYear(string $year)
  * @method static Builder|PublicHoliday query()
  * @mixin Eloquent
+ * @property int $id
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property string|null $deleted_at
+ * @method static Builder|PublicHoliday whereCreatedAt($value)
+ * @method static Builder|PublicHoliday whereDate($value)
+ * @method static Builder|PublicHoliday whereDeletedAt($value)
+ * @method static Builder|PublicHoliday whereId($value)
+ * @method static Builder|PublicHoliday whereName($value)
+ * @method static Builder|PublicHoliday whereUpdatedAt($value)
+ * @method static Builder|PublicHoliday whereYear($value)
  */
 class PublicHoliday extends Model
 {
