@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * App\Models\PublicHoliday
@@ -33,6 +34,8 @@ use Illuminate\Database\Eloquent\Model;
  */
 class PublicHoliday extends Model
 {
+    use SoftDeletes;
+
     public $table = 'public_holidays';
 
     protected $fillable = ['name', 'date', 'year'];

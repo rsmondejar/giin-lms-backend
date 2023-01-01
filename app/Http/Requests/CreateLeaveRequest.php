@@ -16,6 +16,7 @@ class CreateLeaveRequest extends FormRequest
         'comment' => "string", // NOSONAR
         'dates' => "string", // NOSONAR
         'requested_to_user_id' => "string", // NOSONAR
+        'type_id' => "string", // NOSONAR
         'emails' => "string" // NOSONAR
     ])] public function rules(): array
     {
@@ -23,6 +24,7 @@ class CreateLeaveRequest extends FormRequest
             'comment' => 'nullable',
             'dates' => 'required',
             'requested_to_user_id' => 'exists:App\Models\User,id',
+            'type_id' => 'exists:App\Models\LeaveType,id',
             'emails' => 'nullable|string',
         ];
     }

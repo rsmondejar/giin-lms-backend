@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Carbon;
 
 /**
@@ -44,6 +45,8 @@ use Illuminate\Support\Carbon;
  */
 class UserHoliday extends Model
 {
+    use SoftDeletes;
+
     protected $table = 'user_holidays';
 
     protected $fillable = ['user_id', 'year', 'holidays', 'seniority_days', 'extra'];

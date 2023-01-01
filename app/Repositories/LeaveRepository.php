@@ -6,7 +6,6 @@ use Carbon\Carbon;
 use DB;
 use App\Exceptions\RequestHolidaysException;
 use App\Interfaces\ILeaveState;
-use App\Interfaces\ILeaveType;
 use App\Interfaces\IRequestHolidaysErrorCode;
 use App\Models\Leave;
 use App\Models\LeaveDate;
@@ -82,7 +81,7 @@ class LeaveRepository extends BaseRepository
                 'user_id' => auth()->id(),
                 'requested_to_user_id' => $input['requested_to_user_id'],
                 'state_id' => ILeaveState::PENDING,
-                'type_id' => ILeaveType::HOLIDAYS,
+                'type_id' => $input['type_id'],
                 'user_holiday_id' => $userHoliday->id,
             ]);
 

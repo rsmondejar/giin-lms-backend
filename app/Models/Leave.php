@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\HigherOrderBuilderProxy;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Carbon;
 use App\Traits\LeaveStateTrait;
 use App\Traits\LeaveTypeTrait;
@@ -74,6 +75,7 @@ class Leave extends Model
 {
     use LeaveStateTrait;
     use LeaveTypeTrait;
+    use SoftDeletes;
 
     public $table = 'leaves';
 
