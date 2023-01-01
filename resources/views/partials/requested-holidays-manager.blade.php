@@ -7,6 +7,7 @@
                 <thead>
                 <tr>
                     <th>Id.</th>
+                    <th>Usuario</th>
                     <th>Responsable</th>
                     <th>Tipo</th>
                     <th>Estado</th>
@@ -19,6 +20,7 @@
                 @foreach($leaves as $leave)
                     <tr>
                         <td>{!! $leave->id !!}</td>
+                        <td>{!! $leave->user->name !!}</td>
                         <td>{!! $leave->manager->name !!}</td>
                         <td>{!! $leave->type->name !!}</td>
                         <td>{!! $leave->state->name !!}</td>
@@ -31,7 +33,16 @@
                         </td>
                         <td>{!! $leave->comment !!}</td>
                         <td>
-                            {!! Form::open(['route' => ['leaves.destroy', $leave->id], 'method' => 'delete']) !!}
+                            {!! Form::open(['route' => ['team-holidays.approve', $leave->id], 'method' => 'put']) !!}
+                            {!! Form::button('<i class="fa fa-check"></i>', [
+                                'type' => 'submit',
+                                'class' => 'btn btn-info btn-xs',
+                                'onclick' => 'return confirm("'.__('crud.are_you_sure').'")'
+
+                            ]) !!}
+                            {!! Form::close() !!}
+
+                            {!! Form::open(['route' => ['team-holidays.reject', $leave->id], 'method' => 'put']) !!}
                             {!! Form::button('<i class="far fa-window-close"></i>', [
                                 'type' => 'submit',
                                 'class' => 'btn btn-danger btn-xs',

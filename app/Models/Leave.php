@@ -231,4 +231,15 @@ class Leave extends Model
     {
         return $query->where('user_id', $userId);
     }
+
+    /**
+     * Scope By Manager
+     * @param Builder $query
+     * @param int $userId
+     * @return Builder
+     */
+    public function scopeByManager(Builder $query, int $userId): Builder
+    {
+        return $query->where('requested_to_user_id', $userId);
+    }
 }
