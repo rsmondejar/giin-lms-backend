@@ -57,6 +57,7 @@ use Spatie\Permission\Traits\HasRoles;
  * @property-read \App\Models\Department|null $department
  * @method static Builder|User whereBusinessId($value)
  * @method static Builder|User whereDepartmentId($value)
+ * @method static Builder|User ofManagersByUser(\App\Models\User $user)
  */
 class User extends Authenticatable
 {
@@ -111,5 +112,12 @@ class User extends Authenticatable
     public function department(): BelongsTo
     {
         return $this->belongsTo(Department::class);
+    }
+
+    public function scopeOfManagersByUser($query, User $user)
+    {
+        return $query->whereHas('roles', fn ($query) => $query->where('name', 'managers'))
+            ->where('department_id', $user->department_id)
+            ->where('business_id', $user->business_id);
     }
 }

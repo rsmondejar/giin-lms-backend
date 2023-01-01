@@ -3,6 +3,11 @@
 
 // Bootstrap
 @import '~admin-lte/build/scss/adminlte';
+@import '~jquery-ui/themes/base/base';
+@import '~jquery-ui/themes/base/theme';
+@import '~jquery-ui/themes/base/datepicker';
+@import '~flatpickr/dist/flatpickr';
+@import '~bootstrap-duallistbox/src/bootstrap-duallistbox';
 
 // Components
 @import "components/components.datatable";

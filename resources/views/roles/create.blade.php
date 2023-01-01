@@ -5,9 +5,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-12">
-                    <h1>
-                    Create Roles
-                    </h1>
+                    <h1>Crear <strong>Role</strong></h1>
                 </div>
             </div>
         </div>

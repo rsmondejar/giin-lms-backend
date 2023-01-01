@@ -10,7 +10,7 @@
                 <div class="col-sm-6">
                     <a class="btn btn-primary float-right"
                        href="{{ route('permissions.create') }}">
-                        Acciones
+                        Agregar
                     </a>
                 </div>
             </div>
@@ -25,7 +25,7 @@
 
         <div class="card">
             <div class="card-body">
-                @livewire('permissions-table', [])
+                @include('common.table')
             </div>
         </div>
     </div>

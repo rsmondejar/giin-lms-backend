@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\DataTables\UserDataTable;
 use App\Models\Business;
 use App\Models\Department;
+use App\Models\Role;
 use Exception;
 use App\Http\Requests\CreateUserRequest;
 use App\Http\Requests\UpdateUserRequest;
@@ -50,7 +51,9 @@ class UserController extends AppBaseController
     {
         self::viewsShare();
 
-        return view('users.create');
+        return view('users.create')->with([
+            'userRoles' => [],
+        ]);
     }
 
     /**
@@ -104,7 +107,12 @@ class UserController extends AppBaseController
 
         self::viewsShare();
 
-        return view('users.edit')->with('user', $user);
+        $userRoles = $user->roles->pluck('id')->toArray();
+
+        return view('users.edit')->with([
+            'user' => $user,
+            'userRoles' => $userRoles,
+        ]);
     }
 
     /**
@@ -176,10 +184,12 @@ class UserController extends AppBaseController
     {
         $businesses = Business::orderBy('business_name')->pluck('business_name', 'id');
         $departments = Department::orderBy('department_name')->pluck('department_name', 'id');
+        $roles = Role::orderBy('name')->pluck('name', 'id');
 
         \Illuminate\Support\Facades\View::share([
             'businesses' => $businesses,
             'departments' => $departments,
+            'roles' => $roles,
         ]);
     }
 }

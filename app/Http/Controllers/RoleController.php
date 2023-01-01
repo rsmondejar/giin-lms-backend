@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\DataTables\RoleDataTable;
 use Exception;
 use App\Http\Requests\CreateRoleRequest;
 use App\Http\Requests\UpdateRoleRequest;
@@ -19,7 +20,9 @@ class RoleController extends AppBaseController
     /** @var RoleRepository $roleRepository */
     private RoleRepository $roleRepository;
 
-    private const MODEL_NOT_FOUND = 'Role not found';
+    private const MODEL_NOT_FOUND = 'No se ha encontrado el role';
+
+    private const MODEL_NAME = 'Role';
 
     public function __construct(RoleRepository $roleRepo)
     {
@@ -28,19 +31,19 @@ class RoleController extends AppBaseController
 
     /**
      * Display a listing of the Role.
-     * @param Request $request
-     * @return Application|Factory|View
+     * @param RoleDataTable $roleDataTable
+     * @return mixed
      */
-    public function index(Request $request)
+    public function index(RoleDataTable $roleDataTable): mixed
     {
-        return view('roles.index');
+        return $roleDataTable->render('roles.index');
     }
 
     /**
      * Show the form for creating a new Role.
      * @return Application|Factory|View
      */
-    public function create()
+    public function create(): View|Factory|Application
     {
         return view('roles.create');
     }
@@ -50,13 +53,13 @@ class RoleController extends AppBaseController
      * @param CreateRoleRequest $request
      * @return Application|RedirectResponse|Redirector
      */
-    public function store(CreateRoleRequest $request)
+    public function store(CreateRoleRequest $request): Redirector|RedirectResponse|Application
     {
         $input = $request->all();
 
         $this->roleRepository->create($input);
 
-        Flash::success('Role saved successfully.');
+        Flash::success(sprintf("%s guardado correctamente.", self::MODEL_NAME));
 
         return redirect(route('roles.index'));
     }
@@ -66,7 +69,7 @@ class RoleController extends AppBaseController
      * @param int $id
      * @return Application|Factory|View|RedirectResponse|Redirector
      */
-    public function show(int $id)
+    public function show(int $id): View|Factory|Redirector|RedirectResponse|Application
     {
         $role = $this->roleRepository->find($id);
 
@@ -84,7 +87,7 @@ class RoleController extends AppBaseController
      * @param int $id
      * @return Application|Factory|View|RedirectResponse|Redirector
      */
-    public function edit(int $id)
+    public function edit(int $id): View|Factory|Redirector|RedirectResponse|Application
     {
         $role = $this->roleRepository->find($id);
 
@@ -103,7 +106,7 @@ class RoleController extends AppBaseController
      * @param UpdateRoleRequest $request
      * @return Application|RedirectResponse|Redirector
      */
-    public function update(int $id, UpdateRoleRequest $request)
+    public function update(int $id, UpdateRoleRequest $request): Redirector|RedirectResponse|Application
     {
         $role = $this->roleRepository->find($id);
 
@@ -115,7 +118,7 @@ class RoleController extends AppBaseController
 
         $this->roleRepository->update($request->all(), $id);
 
-        Flash::success('Role updated successfully.');
+        Flash::success(sprintf("%s actualizado correctamente.", self::MODEL_NAME));
 
         return redirect(route('roles.index'));
     }
@@ -127,7 +130,7 @@ class RoleController extends AppBaseController
      * @return Application|RedirectResponse|Redirector
      * @throws Exception
      */
-    public function destroy(int $id)
+    public function destroy(int $id): Redirector|RedirectResponse|Application
     {
         $role = $this->roleRepository->find($id);
 
@@ -139,7 +142,7 @@ class RoleController extends AppBaseController
 
         $this->roleRepository->delete($id);
 
-        Flash::success('Role deleted successfully.');
+        Flash::success(sprintf("%s eliminadao correctamente.", self::MODEL_NAME));
 
         return redirect(route('roles.index'));
     }

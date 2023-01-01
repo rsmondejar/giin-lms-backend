@@ -1,6 +1,7 @@
-import { defineConfig } from 'vite';
+import {defineConfig} from 'vite';
 import laravel from 'laravel-vite-plugin';
 import inject from '@rollup/plugin-inject';
+import { esbuildCommonjs } from '@originjs/vite-plugin-commonjs'
 
 export default defineConfig({
     plugins: [
@@ -29,4 +30,11 @@ export default defineConfig({
             },
         ],
     },
+    optimizeDeps: {
+        esbuildOptions: {
+            plugins: [
+                esbuildCommonjs(['jquery', 'jquery-ui-dist/jquery-ui'])
+            ]
+        }
+    }
 });

@@ -10,7 +10,7 @@
 
 <!-- Guard Name Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('guard_name', 'Guard Name:') !!}
+    {!! Form::label('guard_name', 'Nombre del Guard:') !!}
     {!! Form::text('guard_name', 'web',[
         'class' => 'form-control',
         'required' => true,
