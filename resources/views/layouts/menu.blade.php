@@ -5,6 +5,16 @@
     </a>
 </li>
 
+<li class="nav-item"><!-- //NOSONAR -->
+    <a
+        href="{{ route('team-holidays.index') }}"
+        class="nav-link {{ Request::is('team-holidays.index') ? 'active' : '' }}"
+    >
+        <em class="nav-icon fas fa-calendar"></em>
+        <p>Vacaciones del equipo</p>
+    </a>
+</li>
+
 @can('list users')
 <li class="nav-item"><!-- //NOSONAR -->
     <a href="{{ route('users.index') }}" class="nav-link {{ Request::is('users*') ? 'active' : '' }}">

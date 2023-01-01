@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Exceptions\RequestHolidaysException;
+use App\Interfaces\ILeaveState;
+use App\Models\Leave;
 use Exception;
 use App\Http\Requests\CreateLeaveRequest;
 use App\Repositories\LeaveRepository;
@@ -62,7 +64,7 @@ class LeaveController extends AppBaseController
      */
     public function destroy(int $id): Redirector|Application|RedirectResponse
     {
-        $leave = $this->leaveRepository->find($id);
+        $leave = Leave::find($id);
 
         if (empty($leave)) {
             Flash::error(self::MODEL_NOT_FOUND);
@@ -70,10 +72,18 @@ class LeaveController extends AppBaseController
             return redirect(route(self::ROUTE_INDEX));
         }
 
-        $this->leaveRepository->delete($id);
+        $leave->state_id = ILeaveState::CANCELLED;
+        $leave->save();
+
+        // Mark all leaves dates as cancelled
+        foreach ($leave->dates as $date) {
+            $date->is_cancelled = true;
+            $date->save();
+        }
 
         Flash::success(sprintf("%s eliminadas correctamente.", self::MODEL_NAME));
 
         return redirect(route(self::ROUTE_INDEX));
     }
+
 }

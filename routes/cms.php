@@ -5,6 +5,7 @@ use App\Http\Controllers\LeaveController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\PublicHolidaysController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\TeamHolidayController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use InfyOm\GeneratorBuilder\Controllers\GeneratorBuilderController;
@@ -50,3 +51,12 @@ Route::resource('departments', DepartmentController::class);
 Route::resource('users', UserController::class);
 Route::resource('public-holidays', PublicHolidaysController::class);
 Route::resource('leaves', LeaveController::class)->only(['store','destroy']);
+
+Route::group([
+    'prefix' => 'team-holidays',
+    'as' => 'team-holidays.',
+], function () {
+    Route::get('', [TeamHolidayController::class, 'index'])->name('index');
+    Route::put('{id}/approve', [TeamHolidayController::class, 'approve'])->name('approve');
+    Route::put('{id}/reject', [TeamHolidayController::class, 'reject'])->name('reject');
+});
