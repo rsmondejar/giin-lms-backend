@@ -7,7 +7,7 @@ Semver [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
-- 
+- Visualización amigable de logs. @rsmondejar
 
 ## [0.3.0-alpha] - 01/01/2023
 

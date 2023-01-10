@@ -21,9 +21,18 @@
 
 @hasrole('super-admin')
 <li class="nav-item"><!-- //NOSONAR -->
-    <a href="{{ route('io_generator_builder') }}" class="nav-link" target="_blanl" rel="noopener">
+    <a href="{{ route('io_generator_builder') }}" class="nav-link" target="_blank" rel="noopener">
         <em class="nav-icon fas fa-cogs"></em>
         <p>Builder Generator</p>
+    </a>
+</li>
+@endhasrole
+
+@hasrole('super-admin')
+<li class="nav-item">{{--<!-- //NOSONAR -->--}}
+    <a href="/{!! Config::get('log-viewer.route_path') !!}" class="nav-link" target="_blank" rel="noopener">
+        <em class="nav-icon fa fa-file-alt"></em>
+        <span>Log Viewer</span>
     </a>
 </li>
 @endhasrole
