@@ -15,6 +15,7 @@ class AuditObserver
             'event' => $event,
             'model' => $this->getModelName(),
             'data' => $data,
+            'user_id' => auth()->user()->id,
         ]);
     }
 

@@ -31,6 +31,9 @@ class AuditDataTable extends BaseDataTable
             ->editColumn('data', function (Audit $model) {
                 return PrintPreatyJson::print(json_encode($model->data));
             })
+            ->editColumn('user_id', function (Audit $model) {
+                return $model->user_id ?? "";
+            })
             ->addColumn('action', 'audit.datatables_actions')
             ->rawColumns([
                 'action',
@@ -101,6 +104,14 @@ class AuditDataTable extends BaseDataTable
                 'orderable' => false,
                 'render' => null
             ],
+            'user_id' => [
+                'data' => 'user_id',
+                'name' => 'user_id',
+                'title' => 'Id Usuario',
+                'visible' => true,
+                'orderable' => false,
+                'render' => null
+            ],
         ];
     }
 
@@ -111,6 +122,6 @@ class AuditDataTable extends BaseDataTable
      */
     protected function filename(): string
     {
-        return 'departments_datatable_' . time();
+        return 'audit_datatable_' . time();
     }
 }

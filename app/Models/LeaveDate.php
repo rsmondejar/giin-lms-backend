@@ -37,6 +37,9 @@ use Illuminate\Support\Carbon;
  * @method static Builder|LeaveDate whereLeaveId($value)
  * @method static Builder|LeaveDate whereUpdatedAt($value)
  * @mixin Eloquent
+ * @method static \Illuminate\Database\Query\Builder|LeaveDate onlyTrashed()
+ * @method static \Illuminate\Database\Query\Builder|LeaveDate withTrashed()
+ * @method static \Illuminate\Database\Query\Builder|LeaveDate withoutTrashed()
  */
 class LeaveDate extends Model
 {

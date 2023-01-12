@@ -70,6 +70,10 @@ use App\Traits\LeaveTypeTrait;
  * @method static Builder|Leave whereUserHolidayId($value)
  * @method static Builder|Leave whereUserId($value)
  * @mixin Eloquent
+ * @method static Builder|Leave byManager(int $userId)
+ * @method static \Illuminate\Database\Query\Builder|Leave onlyTrashed()
+ * @method static \Illuminate\Database\Query\Builder|Leave withTrashed()
+ * @method static \Illuminate\Database\Query\Builder|Leave withoutTrashed()
  */
 class Leave extends Model
 {

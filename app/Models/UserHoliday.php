@@ -42,6 +42,9 @@ use Illuminate\Support\Carbon;
  * @method static Builder|UserHoliday whereUserId($value)
  * @method static Builder|UserHoliday whereYear($value)
  * @mixin Eloquent
+ * @method static \Illuminate\Database\Query\Builder|UserHoliday onlyTrashed()
+ * @method static \Illuminate\Database\Query\Builder|UserHoliday withTrashed()
+ * @method static \Illuminate\Database\Query\Builder|UserHoliday withoutTrashed()
  */
 class UserHoliday extends Model
 {
