@@ -43,7 +43,7 @@ class AppServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
+    public function boot(): void
     {
         Schema::defaultStringLength(self::DEFAULT_STRING_LENGTH);
 
@@ -57,6 +57,8 @@ class AppServiceProvider extends ServiceProvider
         LeaveDate::observe(LeaveDateObserver::class);
         LeaveState::observe(LeaveStateObserver::class);
         LeaveType::observe(LeaveTypeObserver::class);
+        PublicHoliday::observe(PublicHolidayObserver::class);
         User::observe(UserObserver::class);
+        UserHoliday::observe(UserHolidayObserver::class);
     }
 }
