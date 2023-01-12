@@ -3,7 +3,7 @@ version: '3'
 services:
     laravel.test:
         build:
-            context: ./vendor/laravel/sail/runtimes/8.1
+            context: ./docker/8.1
             dockerfile: Dockerfile
             args:
                 WWWGROUP: '${WWWGROUP}'
@@ -59,9 +59,23 @@ services:
             UPLOAD_LIMIT: 100M
         networks:
             - sail
+    mongo:
+        image: 'mongo:4.4'
+        ports:
+            - "27017:27017"
+        environment:
+            MONGO_INITDB_ROOT_USERNAME: '${DB_MONGO_USERNAME}'
+            MONGO_INITDB_ROOT_PASSWORD: '${DB_MONGO_PASSWORD}'
+            MONGO_INITDB_DATABASE: '${DB_MONGO_DATABASE}'
+        volumes:
+            - 'sail-mongo:/data/db'
+        networks:
+            - sail
 networks:
     sail:
         driver: bridge
 volumes:
     sail-mariadb:
+        driver: local
+    sail-mongo:
         driver: local
