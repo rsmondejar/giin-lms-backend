@@ -31,6 +31,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static Builder|PublicHoliday whereName($value)
  * @method static Builder|PublicHoliday whereUpdatedAt($value)
  * @method static Builder|PublicHoliday whereYear($value)
+ * @method static \Illuminate\Database\Query\Builder|PublicHoliday onlyTrashed()
+ * @method static \Illuminate\Database\Query\Builder|PublicHoliday withTrashed()
+ * @method static \Illuminate\Database\Query\Builder|PublicHoliday withoutTrashed()
  */
 class PublicHoliday extends Model
 {
