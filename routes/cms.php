@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuditController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\LeaveController;
 use App\Http\Controllers\PermissionController;
@@ -42,6 +43,8 @@ Route::get('field_template', [GeneratorBuilderController::class, 'fieldTemplate'
 Route::get('relation_field_template', [GeneratorBuilderController::class, 'relationFieldTemplate'])
     ->name('io_relation_field_template');
 #endregion
+
+Route::resource('audit', AuditController::class)->only(['index','show', 'destroy']);
 
 Route::resource('businesses', App\Http\Controllers\BusinessController::class);
 

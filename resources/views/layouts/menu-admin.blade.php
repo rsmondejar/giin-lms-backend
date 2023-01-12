@@ -36,3 +36,12 @@
     </a>
 </li>
 @endhasrole
+
+@hasrole('super-admin')
+<li class="nav-item"><!-- //NOSONAR -->
+    <a href="{{ route('audit.index') }}" class="nav-link {{ Request::is('audit*') ? 'active' : '' }}">
+        <em class="nav-icon fas fa-shoe-prints"></em>
+        <p>Audit Log</p>
+    </a>
+</li>
+@endhasrole
