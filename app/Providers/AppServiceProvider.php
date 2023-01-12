@@ -2,6 +2,12 @@
 
 namespace App\Providers;
 
+use App\Models\Business;
+use App\Models\Department;
+use App\Models\User;
+use App\Observers\BusinessObserver;
+use App\Observers\DepartmentObserver;
+use App\Observers\UserObserver;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
@@ -32,5 +38,9 @@ class AppServiceProvider extends ServiceProvider
         if (!app()->environment('production')) {
             Mail::alwaysTo(env('MAIL_TO_DEVELOPER', ''));
         }
+
+        Department::observe(DepartmentObserver::class);
+        Business::observe(BusinessObserver::class);
+        User::observe(UserObserver::class);
     }
 }
