@@ -144,7 +144,7 @@ class PublicHolidaysController extends AppBaseController
 
         $this->publicHolidayRepository->delete($id);
 
-        Flash::success(sprintf("%s eliminadao correctamente.", self::MODEL_NAME));
+        Flash::success(sprintf("%s eliminado correctamente.", self::MODEL_NAME));
 
         return redirect(route(self::ROUTE_INDEX));
     }

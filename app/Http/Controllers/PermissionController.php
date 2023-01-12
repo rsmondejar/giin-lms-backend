@@ -142,7 +142,7 @@ class PermissionController extends AppBaseController
 
         $this->permissionRepository->delete($id);
 
-        Flash::success(sprintf("%s eliminadao correctamente.", self::MODEL_NAME));
+        Flash::success(sprintf("%s eliminado correctamente.", self::MODEL_NAME));
 
         return redirect(route('permissions.index'));
     }
