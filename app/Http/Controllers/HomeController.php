@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Leave;
 use App\Models\LeaveType;
 use App\Models\User;
-use Illuminate\Http\Request;
+use App\Http\Controllers\GetRequestHolidaysMetricsController as Metrics;
 
 class HomeController extends Controller
 {
@@ -41,6 +41,25 @@ class HomeController extends Controller
             'managers' => $managers,
             'leaveTypes' => $leaveTypes,
             'leaves' => $leaves,
+            'metrics' => self::getMetrics($authUser),
         ]);
+    }
+
+    public static function getMetrics(User $user): array
+    {
+        return [
+            'sickness_days' => Metrics::getSicknessDaysByUser($user),
+            'unofficial_leaves_days' => Metrics::getUnofficialLeavesDaysByUser($user),
+            'leaves_of_absence_days' => Metrics::getLeavesOfAbsenceDaysByUser($user),
+            'vacations_days' => Metrics::getCurrentVacationsDaysByUser($user),
+            'vacations_remaining_days' => Metrics::getCurrentVacationsRemainingDaysByUser($user),
+            'vacations_per_year_days' => Metrics::getVacationsPerYearDaysByUser($user),
+            'seniority_days' => Metrics::getCurrentSeniorityDaysByUser($user),
+            'seniority_remaining_days' => Metrics::getCurrentSeniorityRemainingDaysByUser($user),
+            'seniority_per_year_days' => Metrics::getSeniorityPerYearDaysByUser($user),
+            'last_year_vacations_days' => Metrics::getLastYearVacationsDaysByUser($user),
+            'last_year_vacations_remaining_days' => Metrics::getLastYearVacationsRemainingDaysByUser($user),
+            'last_year_vacations_per_year_days' => Metrics::getLastYearVacationsPerYearDaysByUser($user),
+        ];
     }
 }

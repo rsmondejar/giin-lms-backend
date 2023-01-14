@@ -74,6 +74,8 @@ use App\Traits\LeaveTypeTrait;
  * @method static \Illuminate\Database\Query\Builder|Leave onlyTrashed()
  * @method static \Illuminate\Database\Query\Builder|Leave withTrashed()
  * @method static \Illuminate\Database\Query\Builder|Leave withoutTrashed()
+ * @method static Builder|Leave ofCurrentYearByUserHolidays()
+ * @method static Builder|Leave ofLastYearByUserHolidays()
  */
 class Leave extends Model
 {
@@ -167,6 +169,26 @@ class Leave extends Model
     public function dates(): HasMany
     {
         return $this->hasMany(LeaveDate::class);
+    }
+
+    /**
+     * Scope Current Year
+     * @param Builder $query
+     * @return Builder
+     */
+    public function scopeOfCurrentYearByUserHolidays(Builder $query): Builder
+    {
+        return $query->whereHas('userHoliday', fn ($query) => $query->where('year', now()->year));
+    }
+
+    /**
+     * Scope Last Year
+     * @param Builder $query
+     * @return Builder
+     */
+    public function scopeOfLastYearByUserHolidays(Builder $query): Builder
+    {
+        return $query->whereHas('userHoliday', fn ($query) => $query->where('year', now()->subYear()->year));
     }
 
     /**
