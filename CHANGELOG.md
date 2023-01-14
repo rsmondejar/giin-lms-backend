@@ -9,6 +9,8 @@ Semver [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 - Visualización amigable de logs. @rsmondejar
 - Auditoria. @rsmondejar
+- Mostrar info vacaciones año anterior y actual. @rsmondejar
+- Deshabilitar días de vacaciones solicitados y festivos. @rsmondejar
 
 ## [0.3.0-alpha] - 01/01/2023
 

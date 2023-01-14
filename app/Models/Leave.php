@@ -247,6 +247,17 @@ class Leave extends Model
         );
     }
 
+
+    /**
+     * Scope Future
+     * @param Builder $query
+     * @return Builder
+     */
+    public function scopeOfLastYearCurrentAndFuture(Builder $query): Builder
+    {
+        return $query->whereHas('dates', fn ($query) => $query->whereYear('date', '>=', now()->subYear()->year));
+    }
+
     /**
      * Scope By User
      * @param Builder $query

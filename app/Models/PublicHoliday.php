@@ -70,4 +70,14 @@ class PublicHoliday extends Model
     {
         return $query->whereYear('year', $year);
     }
+
+    /**
+     * Scope Future
+     * @param Builder $query
+     * @return Builder
+     */
+    public function scopeOfFuture(Builder $query): Builder
+    {
+        return $query->where('year', '>=', today()->year);
+    }
 }
