@@ -74,7 +74,8 @@
         $(function () {
             flatpickr("#datePick", {
                 mode: "multiple",
-                dateFormat: "Y-m-d"
+                dateFormat: "Y-m-d",
+                disable: {!! $datesToDisable !!},
             });
         });
     </script>

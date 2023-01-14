@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Interfaces\ILeaveState;
 use App\Models\Leave;
 use App\Models\LeaveType;
+use App\Models\PublicHoliday;
 use App\Models\User;
 use App\Http\Controllers\GetRequestHolidaysMetricsController as Metrics;
 
@@ -42,9 +44,15 @@ class HomeController extends Controller
             'leaveTypes' => $leaveTypes,
             'leaves' => $leaves,
             'metrics' => self::getMetrics($authUser),
+            'datesToDisable' => self::getDatesToDisable(),
         ]);
     }
 
+    /**
+     * Get User Metrics.
+     * @param User $user
+     * @return array
+     */
     public static function getMetrics(User $user): array
     {
         return [
@@ -61,5 +69,26 @@ class HomeController extends Controller
             'last_year_vacations_remaining_days' => Metrics::getLastYearVacationsRemainingDaysByUser($user),
             'last_year_vacations_per_year_days' => Metrics::getLastYearVacationsPerYearDaysByUser($user),
         ];
+    }
+
+    public static function getDatesToDisable()
+    {
+        $userId = auth()->id();
+
+        $holidays = collect([]);
+        $publicHolidays = PublicHoliday::ofFuture()->get();
+
+        $publicHolidays->each(fn ($holiday) => $holidays->push($holiday->date->format('Y-m-d')));
+
+        // Get holidays last Year, current and next year (future)
+        $leaveDates = Leave::ofLastYearCurrentAndFuture()
+            ->whereIn('state_id', [ILeaveState::PENDING, ILeaveState::APPROVED])
+            ->where('user_id', $userId)
+            ->get()
+            ->pluck('dates');
+
+        $leaveDates->each->each(fn ($holiday) => $holidays->push($holiday->date->format('Y-m-d')));
+
+        return $holidays;
     }
 }
