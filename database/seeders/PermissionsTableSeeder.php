@@ -7,8 +7,8 @@ use Illuminate\Database\Seeder;
 
 class PermissionsTableSeeder extends Seeder
 {
-    public static array $options = ['create', 'edit', 'update', 'show', 'delete', 'list'];
-    public static array $sections = ['permissions', 'roles', 'business', 'departments', 'users', 'public holidays'];
+    public static array $options = ['create', 'store', 'edit', 'update', 'show', 'destroy', 'list'];
+    public static array $sections = ['permissions', 'roles', 'businesses', 'departments', 'users', 'public holidays'];
 
     /**
      * Run the database seeds.
