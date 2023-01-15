@@ -37,7 +37,10 @@ class PublicHolidaysController extends AppBaseController
      */
     public function index(PublicHolidaysDataTable $publicHolidaysDataTable): mixed
     {
-    return $publicHolidaysDataTable->render('public_holidays.index');
+        if (!auth()->user()->can('list public holidays')) {
+            abort(403);
+        }
+        return $publicHolidaysDataTable->render('public_holidays.index');
     }
 
 
@@ -47,6 +50,10 @@ class PublicHolidaysController extends AppBaseController
      */
     public function create(): Factory|View|Application
     {
+        if (!auth()->user()->can('create public holidays')) {
+            abort(403);
+        }
+
         return view('public_holidays.create');
     }
 
@@ -57,6 +64,10 @@ class PublicHolidaysController extends AppBaseController
      */
     public function store(CreatePublicHolidayRequest $request): Redirector|Application|RedirectResponse
     {
+        if (!auth()->user()->can('store public holidays')) {
+            abort(403);
+        }
+
         $input = $request->all();
 
         $this->publicHolidayRepository->create($input);
@@ -73,6 +84,10 @@ class PublicHolidaysController extends AppBaseController
      */
     public function show(int $id): View|Factory|Redirector|Application|RedirectResponse
     {
+        if (!auth()->user()->can('show public holidays')) {
+            abort(403);
+        }
+
         $publicHoliday = $this->publicHolidayRepository->find($id);
 
         if (empty($publicHoliday)) {
@@ -91,6 +106,10 @@ class PublicHolidaysController extends AppBaseController
      */
     public function edit(int $id): View|Factory|Redirector|Application|RedirectResponse
     {
+        if (!auth()->user()->can('edit public holidays')) {
+            abort(403);
+        }
+
         $publicHoliday = $this->publicHolidayRepository->find($id);
 
         if (empty($publicHoliday)) {
@@ -110,6 +129,10 @@ class PublicHolidaysController extends AppBaseController
      */
     public function update(int $id, UpdatePublicHolidayRequest $request): Redirector|Application|RedirectResponse
     {
+        if (!auth()->user()->can('update public holidays')) {
+            abort(403);
+        }
+
         $publicHoliday = $this->publicHolidayRepository->find($id);
 
         if (empty($publicHoliday)) {
@@ -134,6 +157,10 @@ class PublicHolidaysController extends AppBaseController
      */
     public function destroy(int $id): Redirector|Application|RedirectResponse
     {
+        if (!auth()->user()->can('destroy public holidays')) {
+            abort(403);
+        }
+
         $publicHoliday = $this->publicHolidayRepository->find($id);
 
         if (empty($publicHoliday)) {

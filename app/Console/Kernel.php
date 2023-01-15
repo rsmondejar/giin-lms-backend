@@ -4,6 +4,7 @@ namespace App\Console;
 
 use App\Console\Commands\GenerateUserHolidays;
 use App\Console\Commands\GenerateUserHolidaysNextYear;
+use App\Console\Commands\SyncPermissions;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 use InfyOm\Generator\Commands\API\APIControllerGeneratorCommand;
@@ -22,6 +23,7 @@ class Kernel extends ConsoleKernel
         ScaffoldGeneratorCommand::class,
         GenerateUserHolidays::class,
         GenerateUserHolidaysNextYear::class,
+        SyncPermissions::class,
     ];
 
     /**

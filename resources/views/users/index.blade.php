@@ -7,12 +7,14 @@
                 <div class="col-sm-6">
                     <h1>Listado de <strong>Usuarios</strong></h1>
                 </div>
+                @can('create users')
                 <div class="col-sm-6">
                     <a class="btn btn-primary float-right"
                        href="{{ route('users.create') }}">
                         Agregar
                     </a>
                 </div>
+                @endcan
             </div>
         </div>
     </section>

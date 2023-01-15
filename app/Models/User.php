@@ -78,7 +78,6 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'business_id',
         'department_id',
     ];
 
@@ -92,6 +91,10 @@ class User extends Authenticatable
         'remember_token',
     ];
 
+    protected $appends = [
+        'business_id',
+    ];
+
     /**
      * The attributes that should be cast.
      *
@@ -101,12 +104,17 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    /**
-     * @return BelongsTo
-     */
-    public function business(): BelongsTo
+    public function getBusinessIdAttribute()
     {
-        return $this->belongsTo(Business::class);
+        return $this->incorporationDates()->whereNull('end_date')?->first()?->business_id ?? null;
+    }
+
+    /**
+     * @return BelongsTo|null
+     */
+    public function business(): ?BelongsTo
+    {
+        return $this->incorporationDates()->whereNull('end_date')?->first()?->business() ?? null;
     }
 
     /**
@@ -128,8 +136,12 @@ class User extends Authenticatable
 
     public function scopeOfManagersByUser($query, User $user)
     {
-        return $query->whereHas('roles', fn ($query) => $query->where('name', 'managers'))
-            ->where('department_id', $user->department_id)
-            ->where('business_id', $user->business_id);
+        return $query
+            ->whereHas('roles', fn ($query) => $query->where('name', 'managers'))
+            ->whereHas(
+                'incorporationDates',
+                fn ($query) => $query->where('business_id', $user->business_id)->whereNull('end_date')
+            )
+            ->where('department_id', $user->department_id);
     }
 }
