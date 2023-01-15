@@ -23,7 +23,7 @@ class DepartmentFactory extends Factory
     public function definition(): array
     {
         return [
-            'department_name' => $this->faker->text($this->faker->numberBetween(5, 60)),
+            'department_name' => "Departamento " . $this->faker->text($this->faker->numberBetween(5, 50)),
             'created_at' => $this->faker->date('Y-m-d H:i:s'),
             'updated_at' => $this->faker->date('Y-m-d H:i:s'),
             'deleted_at' => null,

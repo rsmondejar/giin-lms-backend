@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\DatabaseNotification;
 use Illuminate\Notifications\DatabaseNotificationCollection;
@@ -53,11 +54,11 @@ use Spatie\Permission\Traits\HasRoles;
  * @mixin Eloquent
  * @property int|null $business_id
  * @property int|null $department_id
- * @property-read \App\Models\Business|null $business
- * @property-read \App\Models\Department|null $department
+ * @property-read Business|null $business
+ * @property-read Department|null $department
  * @method static Builder|User whereBusinessId($value)
  * @method static Builder|User whereDepartmentId($value)
- * @method static Builder|User ofManagersByUser(\App\Models\User $user)
+ * @method static Builder|User ofManagersByUser(User $user)
  */
 class User extends Authenticatable
 {
@@ -112,6 +113,15 @@ class User extends Authenticatable
     public function department(): BelongsTo
     {
         return $this->belongsTo(Department::class);
+    }
+
+    /**
+     * Incorporation Dates
+     * @return hasMany
+     */
+    public function incorporationDates(): hasMany
+    {
+        return $this->hasMany(IncorporationDate::class, 'user_id', 'id');
     }
 
     public function scopeOfManagersByUser($query, User $user)

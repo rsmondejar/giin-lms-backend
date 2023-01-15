@@ -22,15 +22,18 @@ class PublicHolidayFactory extends Factory
      */
     public function definition(): array
     {
-        $date = $this->faker->dateTimeBetween('now', '2 years');
+        $date = $this->faker->unique()->dateTimeBetween(
+            today()->startOfYear(),
+            today()->endOfYear(),
+        );
 
         return [
             'name' => $this->faker->text($this->faker->numberBetween(5, 191)),
             'date' => $date->format('Y-m-d'),
             'year' => $date->format('Y'),
-            'created_at' => $this->faker->date('Y-m-d H:i:s'), // NOSONAR
-            'updated_at' => $this->faker->date('Y-m-d H:i:s'), // NOSONAR
-            'deleted_at' => $this->faker->date('Y-m-d H:i:s') // NOSONAR
+            'created_at' => now(), // NOSONAR
+            'updated_at' => now(), // NOSONAR
+            'deleted_at' => null, // NOSONAR
         ];
     }
 }
