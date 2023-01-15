@@ -6,11 +6,12 @@ use App\Models\Business;
 use App\Models\Department;
 use App\Models\Role;
 use App\Models\User;
+use Faker\Factory;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
 
-class ManagerUsersTableSeeder extends Seeder
+class UsersTypeManagersTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -19,18 +20,14 @@ class ManagerUsersTableSeeder extends Seeder
      */
     public function run(): void
     {
-        $totalManagersPerDepartment = 3;
+        $totalManagersPerDepartment = 1;
         $businesses = Business::all();
         $departments = Department::all();
 
-        $managerRole = 'managers';
-        $role = Role::where('name', $managerRole)->first();
-        if (is_null($role)) {
-            $role = Role::create([
-                'name' => $managerRole,
-                'guard_name' => 'web',
-            ]);
-        }
+        $role = Role::firstOrCreate([
+            'name' => 'managers',
+            'guard_name' => 'web',
+        ]);
 
         $index = 0;
         /** @var Business $business */
@@ -40,22 +37,32 @@ class ManagerUsersTableSeeder extends Seeder
                 for ($i = 0; $i < $totalManagersPerDepartment; $i++) {
                     $displayName = "Manager " . str_pad($index, 3, '0', STR_PAD_LEFT);
 
-                    $user = User::factory()->create([
-                        'name' => $displayName,
+                    $user = User::updateOrCreate([
                         'email' => Str::slug($displayName, '.') . '@example.com',
+                    ], [
+                        'name' => $displayName,
                         'email_verified_at' => null,
                         'password' => Hash::make('password'),
                         'remember_token' => null,
-                        'business_id' => $business->id,
                         'department_id' => $department->id,
                         'created_at' => now(),
                         'updated_at' => now(),
                     ]);
 
-                    $index++;
+                    // Add Incorporation Date
+                    $user->incorporationDates()->updateOrCreate(
+                        [
+                            'business_id' => $business->id,
+                        ],
+                        [
+                            'begin_date' => (Factory::create())->dateTimeBetween('-5 years'),
+                        ]
+                    );
 
                     // Assign role "managers"
                     $user->roles()->sync($role->id);
+
+                    $index++;
                 }
             }
         }

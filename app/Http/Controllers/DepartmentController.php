@@ -36,6 +36,9 @@ class DepartmentController extends AppBaseController
      */
     public function index(DepartmentDataTable $departmentDataTable): mixed
     {
+        if (!auth()->user()->can('list departments')) {
+            abort(403);
+        }
         return $departmentDataTable->render('departments.index');
     }
 
@@ -45,6 +48,10 @@ class DepartmentController extends AppBaseController
      */
     public function create(): Factory|View|Application
     {
+        if (!auth()->user()->can('create departments')) {
+            abort(403);
+        }
+
         return view('departments.create');
     }
 
@@ -55,6 +62,10 @@ class DepartmentController extends AppBaseController
      */
     public function store(CreateDepartmentRequest $request): Redirector|Application|RedirectResponse
     {
+        if (!auth()->user()->can('store departments')) {
+            abort(403);
+        }
+
         $input = $request->all();
 
         $this->departmentRepository->create($input);
@@ -71,6 +82,10 @@ class DepartmentController extends AppBaseController
      */
     public function show(int $id): View|Factory|Redirector|RedirectResponse|Application
     {
+        if (!auth()->user()->can('show departments')) {
+            abort(403);
+        }
+
         $department = $this->departmentRepository->find($id);
 
         if (empty($department)) {
@@ -89,6 +104,10 @@ class DepartmentController extends AppBaseController
      */
     public function edit(int $id): View|Factory|Redirector|RedirectResponse|Application
     {
+        if (!auth()->user()->can('edit departments')) {
+            abort(403);
+        }
+
         $department = $this->departmentRepository->find($id);
 
         if (empty($department)) {
@@ -108,6 +127,10 @@ class DepartmentController extends AppBaseController
      */
     public function update(int $id, UpdateDepartmentRequest $request): Redirector|RedirectResponse|Application
     {
+        if (!auth()->user()->can('update departments')) {
+            abort(403);
+        }
+
         $department = $this->departmentRepository->find($id);
 
         if (empty($department)) {
@@ -132,6 +155,10 @@ class DepartmentController extends AppBaseController
      */
     public function destroy(int $id): Redirector|RedirectResponse|Application
     {
+        if (!auth()->user()->can('destroy departments')) {
+            abort(403);
+        }
+
         $department = $this->departmentRepository->find($id);
 
         if (empty($department)) {

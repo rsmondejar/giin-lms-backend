@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents; // NOSONAR
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -12,14 +11,33 @@ class DatabaseSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
+    public function run(): void
     {
-        // \App\Models\User::factory(10)->create(); // NOSONAR
+        // Create permissions
+        (new PermissionsTableSeeder())->run();
 
-        // NOSONAR
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        // Create roles
+        (new RolesTableSeeder())->run();
+
+        // Roles Permissions for HR
+        (new RolesPermissionsForHRTableSeeder())->run();
+
+        // Roles Permissions for Managers
+        (new RolesPermissionsForManagersTableSeeder())->run();
+
+        // Roles Permissions for Users
+        (new RolesPermissionsForUsersTableSeeder())->run();
+
+        // Create Businesses
+//        (new BusinessesTableSeeder())->run();
+
+        // Create Departments
+//        (new DepartmentsTableSeeder())->run();
+
+        // Create Public Holidays current year
+//        (new PublicHolidayTableSeeder())->run();
+
+        // Create Users
+        (new UsersTableSeeder())->run();
     }
 }

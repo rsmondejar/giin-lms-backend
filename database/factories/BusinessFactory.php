@@ -23,7 +23,7 @@ class BusinessFactory extends Factory
     public function definition(): array
     {
         return [
-            'business_name' => $this->faker->text($this->faker->numberBetween(5, 60)),
+            'business_name' => "Empresa " . $this->faker->text($this->faker->numberBetween(5, 50)),
             'address' => $this->faker->streetAddress(),
             'city' => $this->faker->city(),
             'postal_code' => $this->faker->postcode(),

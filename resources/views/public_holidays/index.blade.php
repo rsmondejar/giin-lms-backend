@@ -8,12 +8,14 @@
                     <h1>Listado de <strong>Festivos</strong></h1>
 
                 </div>
+                @can('create public holidays')
                 <div class="col-sm-6">
                     <a class="btn btn-primary float-right"
                        href="{{ route('public-holidays.create') }}">
                         Agregar
                     </a>
                 </div>
+                @endcan
             </div>
         </div>
     </section>

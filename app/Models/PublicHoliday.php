@@ -5,6 +5,7 @@ namespace App\Models;
 use Carbon\Carbon;
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -34,10 +35,13 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Query\Builder|PublicHoliday onlyTrashed()
  * @method static \Illuminate\Database\Query\Builder|PublicHoliday withTrashed()
  * @method static \Illuminate\Database\Query\Builder|PublicHoliday withoutTrashed()
+ * @method static Builder|PublicHoliday ofFuture()
+ * @method static \Database\Factories\PublicHolidayFactory factory(...$parameters)
  */
 class PublicHoliday extends Model
 {
     use SoftDeletes;
+    use HasFactory;
 
     public $table = 'public_holidays';
 

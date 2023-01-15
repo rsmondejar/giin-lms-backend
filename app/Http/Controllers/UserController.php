@@ -40,6 +40,10 @@ class UserController extends AppBaseController
      */
     public function index(UserDataTable $userDataTable): mixed
     {
+        if (!auth()->user()->can('list users')) {
+            abort(403);
+        }
+
         return $userDataTable->render('users.index');
     }
 
@@ -49,6 +53,10 @@ class UserController extends AppBaseController
      */
     public function create(): Factory|View|Application
     {
+        if (!auth()->user()->can('create users')) {
+            abort(403);
+        }
+
         self::viewsShare();
 
         return view('users.create')->with([
@@ -63,6 +71,10 @@ class UserController extends AppBaseController
      */
     public function store(CreateUserRequest $request): Redirector|Application|RedirectResponse
     {
+        if (!auth()->user()->can('store users')) {
+            abort(403);
+        }
+
         $dataRequest = self::parseRequest($request->all());
 
         $this->userRepository->create($dataRequest);
@@ -79,6 +91,10 @@ class UserController extends AppBaseController
      */
     public function show(int $id): View|Factory|Redirector|RedirectResponse|Application
     {
+        if (!auth()->user()->can('show users')) {
+            abort(403);
+        }
+
         $user = $this->userRepository->find($id);
 
         if (empty($user)) {
@@ -97,6 +113,10 @@ class UserController extends AppBaseController
      */
     public function edit(int $id): View|Factory|Redirector|RedirectResponse|Application
     {
+        if (!auth()->user()->can('edit users')) {
+            abort(403);
+        }
+
         $user = $this->userRepository->find($id);
 
         if (empty($user)) {
@@ -123,6 +143,10 @@ class UserController extends AppBaseController
      */
     public function update(int $id, UpdateUserRequest $request): Redirector|RedirectResponse|Application
     {
+        if (!auth()->user()->can('update users')) {
+            abort(403);
+        }
+
         $user = $this->userRepository->find($id);
 
         if (empty($user)) {
@@ -149,6 +173,10 @@ class UserController extends AppBaseController
      */
     public function destroy(int $id): Redirector|RedirectResponse|Application
     {
+        if (!auth()->user()->can('destroy users')) {
+            abort(403);
+        }
+
         $user = $this->userRepository->find($id);
 
         if (empty($user)) {

@@ -26,11 +26,6 @@ class UserFactory extends Factory
      */
     public function definition(): array
     {
-        $business = Business::inRandomOrder()->first();
-        if (!$business) {
-            $business = Business::factory()->create();
-        }
-
         $department = Department::inRandomOrder()->first();
         if (!$department) {
             $department = Department::factory()->create();
@@ -44,7 +39,6 @@ class UserFactory extends Factory
             'email_verified_at' => null,
             'password' => Hash::make('password'),
             'remember_token' => null,
-            'business_id' => $business->id,
             'department_id' => $department->id,
             'created_at' => $this->faker->date('Y-m-d H:i:s'), // NOSONAR
             'updated_at' => $this->faker->date('Y-m-d H:i:s') // NOSONAR

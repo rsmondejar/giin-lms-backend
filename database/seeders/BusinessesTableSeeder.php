@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Business;
 use Illuminate\Database\Seeder;
 
 class BusinessesTableSeeder extends Seeder
@@ -11,8 +12,8 @@ class BusinessesTableSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
+    public function run(): void
     {
-
+        Business::factory(5)->create();
     }
 }

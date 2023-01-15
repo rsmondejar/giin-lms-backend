@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\DatabaseNotification;
 use Illuminate\Notifications\DatabaseNotificationCollection;
@@ -53,11 +54,13 @@ use Spatie\Permission\Traits\HasRoles;
  * @mixin Eloquent
  * @property int|null $business_id
  * @property int|null $department_id
- * @property-read \App\Models\Business|null $business
- * @property-read \App\Models\Department|null $department
+ * @property-read Business|null $business
+ * @property-read Department|null $department
  * @method static Builder|User whereBusinessId($value)
  * @method static Builder|User whereDepartmentId($value)
- * @method static Builder|User ofManagersByUser(\App\Models\User $user)
+ * @method static Builder|User ofManagersByUser(User $user)
+ * @property-read Collection|\App\Models\IncorporationDate[] $incorporationDates
+ * @property-read int|null $incorporation_dates_count
  */
 class User extends Authenticatable
 {
@@ -75,7 +78,6 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'business_id',
         'department_id',
     ];
 
@@ -89,6 +91,10 @@ class User extends Authenticatable
         'remember_token',
     ];
 
+    protected $appends = [
+        'business_id',
+    ];
+
     /**
      * The attributes that should be cast.
      *
@@ -98,12 +104,17 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    /**
-     * @return BelongsTo
-     */
-    public function business(): BelongsTo
+    public function getBusinessIdAttribute()
     {
-        return $this->belongsTo(Business::class);
+        return $this->incorporationDates()->whereNull('end_date')?->first()?->business_id ?? null;
+    }
+
+    /**
+     * @return BelongsTo|null
+     */
+    public function business(): ?BelongsTo
+    {
+        return $this->incorporationDates()->whereNull('end_date')?->first()?->business() ?? null;
     }
 
     /**
@@ -114,10 +125,23 @@ class User extends Authenticatable
         return $this->belongsTo(Department::class);
     }
 
+    /**
+     * Incorporation Dates
+     * @return hasMany
+     */
+    public function incorporationDates(): hasMany
+    {
+        return $this->hasMany(IncorporationDate::class, 'user_id', 'id');
+    }
+
     public function scopeOfManagersByUser($query, User $user)
     {
-        return $query->whereHas('roles', fn ($query) => $query->where('name', 'managers'))
-            ->where('department_id', $user->department_id)
-            ->where('business_id', $user->business_id);
+        return $query
+            ->whereHas('roles', fn ($query) => $query->where('name', 'managers'))
+            ->whereHas(
+                'incorporationDates',
+                fn ($query) => $query->where('business_id', $user->business_id)->whereNull('end_date')
+            )
+            ->where('department_id', $user->department_id);
     }
 }

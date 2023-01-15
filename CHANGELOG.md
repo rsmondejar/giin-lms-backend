@@ -11,6 +11,10 @@ Semver [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 - Auditoria. @rsmondejar
 - Mostrar info vacaciones año anterior y actual. @rsmondejar
 - Deshabilitar días de vacaciones solicitados y festivos. @rsmondejar
+- Fechas de incorporación de usuarios. @rsmondejar
+- Calculo de días de vacaciones y días de antigüedad. @rsmondejar
+- Comandos para generar días de vacaciones y días de antigüedad. @rsmondejar
+- Proteger secciones de la web via roles y permisos. @rsmondejar
 
 ## [0.3.0-alpha] - 01/01/2023
 

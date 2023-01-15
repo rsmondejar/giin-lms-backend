@@ -76,6 +76,7 @@ use App\Traits\LeaveTypeTrait;
  * @method static \Illuminate\Database\Query\Builder|Leave withoutTrashed()
  * @method static Builder|Leave ofCurrentYearByUserHolidays()
  * @method static Builder|Leave ofLastYearByUserHolidays()
+ * @method static Builder|Leave ofLastYearCurrentAndFuture()
  */
 class Leave extends Model
 {

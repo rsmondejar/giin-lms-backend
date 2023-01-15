@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\PublicHoliday;
 use Illuminate\Database\Seeder;
 
 class PublicHolidayTableSeeder extends Seeder
@@ -11,8 +12,8 @@ class PublicHolidayTableSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
+    public function run(): void
     {
-
+        PublicHoliday::factory(20)->create();
     }
 }

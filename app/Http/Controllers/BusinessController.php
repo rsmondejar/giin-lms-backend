@@ -34,6 +34,10 @@ class BusinessController extends AppBaseController
      */
     public function index(BusinessDataTable $businessDataTable): mixed
     {
+        if (!auth()->user()->can('list businesses')) {
+            abort(403);
+        }
+
         return $businessDataTable->render('businesses.index');
     }
 
@@ -43,6 +47,10 @@ class BusinessController extends AppBaseController
      */
     public function create(): Factory|View|Application
     {
+        if (!auth()->user()->can('create businesses')) {
+            abort(403);
+        }
+
         return view('businesses.create');
     }
 
@@ -53,6 +61,10 @@ class BusinessController extends AppBaseController
      */
     public function store(CreateBusinessRequest $request): Redirector|RedirectResponse|Application
     {
+        if (!auth()->user()->can('store businesses')) {
+            abort(403);
+        }
+
         $input = $request->all();
 
         $this->businessRepository->create($input);
@@ -69,6 +81,10 @@ class BusinessController extends AppBaseController
      */
     public function show(int $id): View|Factory|Redirector|RedirectResponse|Application
     {
+        if (!auth()->user()->can('show businesses')) {
+            abort(403);
+        }
+
         $business = $this->businessRepository->find($id);
 
         if (empty($business)) {
@@ -87,6 +103,10 @@ class BusinessController extends AppBaseController
      */
     public function edit(int $id): View|Factory|Redirector|Application|RedirectResponse
     {
+        if (!auth()->user()->can('edit businesses')) {
+            abort(403);
+        }
+
         $business = $this->businessRepository->find($id);
 
         if (empty($business)) {
@@ -106,6 +126,10 @@ class BusinessController extends AppBaseController
      */
     public function update(int $id, UpdateBusinessRequest $request): Redirector|Application|RedirectResponse
     {
+        if (!auth()->user()->can('update businesses')) {
+            abort(403);
+        }
+
         $business = $this->businessRepository->find($id);
 
         if (empty($business)) {
@@ -130,6 +154,10 @@ class BusinessController extends AppBaseController
      */
     public function destroy(int $id)
     {
+        if (!auth()->user()->can('destroy businesses')) {
+            abort(403);
+        }
+
         $business = $this->businessRepository->find($id);
 
         if (empty($business)) {
