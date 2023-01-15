@@ -36,6 +36,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Query\Builder|PublicHoliday withTrashed()
  * @method static \Illuminate\Database\Query\Builder|PublicHoliday withoutTrashed()
  * @method static Builder|PublicHoliday ofFuture()
+ * @method static \Database\Factories\PublicHolidayFactory factory(...$parameters)
  */
 class PublicHoliday extends Model
 {

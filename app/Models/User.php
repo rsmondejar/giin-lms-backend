@@ -59,6 +59,8 @@ use Spatie\Permission\Traits\HasRoles;
  * @method static Builder|User whereBusinessId($value)
  * @method static Builder|User whereDepartmentId($value)
  * @method static Builder|User ofManagersByUser(User $user)
+ * @property-read Collection|\App\Models\IncorporationDate[] $incorporationDates
+ * @property-read int|null $incorporation_dates_count
  */
 class User extends Authenticatable
 {
