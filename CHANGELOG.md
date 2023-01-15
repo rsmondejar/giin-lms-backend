@@ -7,6 +7,8 @@ Semver [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+## [1.0.0] - 15/01/2023
+
 - Visualización amigable de logs. @rsmondejar
 - Auditoria. @rsmondejar
 - Mostrar info vacaciones año anterior y actual. @rsmondejar
