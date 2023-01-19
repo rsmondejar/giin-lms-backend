@@ -64,7 +64,7 @@
                     <div class="info-box-content">
                         <span class="info-box-text">Dias Ausencia {!! today()->year !!}</span>
                         <span class="info-box-number">
-                            {!! $metrics['sickness_days'] !!}
+                            {!! $metrics['unofficial_leaves_days'] !!}
                         </span>
                     </div>
                 </div>

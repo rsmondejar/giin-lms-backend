@@ -7,6 +7,10 @@ Semver [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+## [1.0.1] - 19/01/2023
+
+- FIX total días de baja no oficiales. @rsmondejar
+
 ## [1.0.0] - 15/01/2023
 
 - Visualización amigable de logs. @rsmondejar
