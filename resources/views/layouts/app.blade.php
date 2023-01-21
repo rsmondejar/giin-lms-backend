@@ -43,7 +43,8 @@
                              class="img-circle elevation-2"
                              alt="User Image">
                         <p>
-                            {{ Auth::user()->name }}
+                            <small>Empresa: {{ Auth::user()->business->business_name }}</small>
+                            <small>Empresa: {{ Auth::user()->department->department_name }}</small>
                             <small>{{ __('app.member_since') }} {{ Auth::user()->created_at->format('M. Y') }}</small>
                         </p>
                     </li>
