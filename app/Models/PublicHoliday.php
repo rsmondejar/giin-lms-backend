@@ -72,7 +72,7 @@ class PublicHoliday extends Model
      */
     public function scopeOfYear(Builder $query, string $year): Builder
     {
-        return $query->whereYear('year', $year);
+        return $query->where('year', $year);
     }
 
     /**
